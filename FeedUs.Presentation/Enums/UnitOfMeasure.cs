@@ -16,5 +16,7 @@ public enum UnitOfMeasure
     FluidOunce,
     Pint,
     Quart,
-    Gallon
+    Gallon,
+    Can,
+    Slice
 }

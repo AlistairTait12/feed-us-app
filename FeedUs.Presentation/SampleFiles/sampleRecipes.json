@@ -1,0 +1,32 @@
+﻿[
+  {
+    "Title": "Beans on Toast",
+    "Ingredients": [
+      {
+        "Name": "Baked Beans",
+        "Quantity": 1,
+        "Unit": "Can"
+      },
+      {
+        "Name": "Bread",
+        "Quantity": 2,
+        "Unit": "Slice"
+      }
+    ]
+  },
+  {
+    "Title": "Pasta",
+    "Ingredients": [
+      {
+        "Name": "Pasta",
+        "Quantity": 1,
+        "Unit": "Cup"
+      },
+      {
+        "Name": "Chopped Tomatoes",
+        "Quantity": 1,
+        "Unit": "Can"
+      }
+    ]
+  }
+]
