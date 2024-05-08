@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:FeedUs.Presentation.Models"
+             xmlns:viewModel="clr-namespace:FeedUs.Presentation.ViewModels"
+             x:DataType="viewModel:RecipeDetailsViewModel"
+             x:Class="FeedUs.Presentation.Views.RecipeDetailsPage"
+             Title="RecipeDetailsPage">
+    <VerticalStackLayout>
+        <Label Text="{Binding Recipe.Title}"
+               FontSize="Title"/>
+        <CollectionView ItemsSource="{Binding Recipe.Ingredients}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Ingredient">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="25"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"
+                               Text="{Binding Name}"
+                               FontAttributes="Bold"
+                               Grid.ColumnSpan="2"/>
+                        <Label Grid.Row="1"
+                               Text="{Binding Quantity}"
+                               Grid.Column="0"/>
+                        <Label Grid.Row="1"
+                               Text="{Binding Unit}"
+                               Grid.Column="1"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

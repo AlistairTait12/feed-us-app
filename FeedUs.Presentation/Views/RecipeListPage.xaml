@@ -11,11 +11,18 @@
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <CollectionView
-            ItemsSource="{Binding Recipes}">
+        <CollectionView ItemsSource="{Binding Recipes}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Recipe">
-                    <Label Text="{Binding Title}" FontAttributes="Bold"/>
+                    <Border Stroke="Black" StrokeThickness="2">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:RecipeListViewModel}},
+                                    Path=GoToRecipeDetailsCommand}"
+                                CommandParameter="{Binding .}"/>
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Title}" FontAttributes="Bold"/>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
