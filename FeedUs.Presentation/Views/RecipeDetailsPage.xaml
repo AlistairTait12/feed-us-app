@@ -6,34 +6,43 @@
              x:DataType="viewModel:RecipeDetailsViewModel"
              x:Class="FeedUs.Presentation.Views.RecipeDetailsPage"
              Title="RecipeDetailsPage">
-    <VerticalStackLayout>
+    <VerticalStackLayout
+        Padding="30,0">
         <Label Text="{Binding Recipe.Title}"
                FontSize="Title"/>
+        <Label Text="{Binding Recipe.Description}"
+               FontSize="Body"/>
+        <Label Text="Ingredients"
+               FontSize="Large"/>
         <CollectionView ItemsSource="{Binding Recipe.Ingredients}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Ingredient">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="25"/>
-                            <RowDefinition Height="25"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0"
-                               Text="{Binding Name}"
-                               FontAttributes="Bold"
-                               Grid.ColumnSpan="2"/>
-                        <Label Grid.Row="1"
-                               Text="{Binding Quantity}"
-                               Grid.Column="0"/>
-                        <Label Grid.Row="1"
-                               Text="{Binding Unit}"
-                               Grid.Column="1"/>
-                    </Grid>
+                    <Border Stroke="MediumPurple">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0"
+                                   Text="{Binding Name}"
+                                   FontAttributes="Bold"
+                                   Grid.ColumnSpan="2"/>
+                            <Label Grid.Row="1"
+                                   Text="{Binding Quantity}"
+                                   Grid.Column="0"/>
+                            <Label Grid.Row="1"
+                                   Text="{Binding Unit}"
+                                   Grid.Column="1"/>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Button Text="Back"
+                Command="{Binding GoBackCommand}"/>
     </VerticalStackLayout>
 </ContentPage>

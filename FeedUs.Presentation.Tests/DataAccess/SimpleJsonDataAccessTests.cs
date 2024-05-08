@@ -30,6 +30,7 @@ public class SimpleJsonDataAccessTests
             {
                 Id = 1,
                 Title = "Beans on Toast",
+                Description = "Simple classic",
                 Ingredients =
                 [
                     new() { Name = "Baked Beans", Quantity = 1, Unit = UnitOfMeasure.Can },
@@ -40,6 +41,7 @@ public class SimpleJsonDataAccessTests
             {
                 Id = 2,
                 Title = "Pasta",
+                Description = "Easy and quick meal",
                 Ingredients =
                 [
                     new() { Name = "Pasta", Quantity = 100, Unit = UnitOfMeasure.Gram },
@@ -64,6 +66,7 @@ public class SimpleJsonDataAccessTests
         {
             Id = 1,
             Title = "Beans on Toast",
+            Description = "Simple classic",
             Ingredients =
             [
                 new Ingredient { Name = "Baked Beans", Quantity = 1, Unit = UnitOfMeasure.Can },

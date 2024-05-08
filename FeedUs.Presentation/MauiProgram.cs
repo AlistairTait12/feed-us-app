@@ -27,7 +27,7 @@ public static class MauiProgram
             return new SimpleJsonDataAccess(_filePath);
         });
         builder.Services.AddTransient<RecipeListViewModel>();
-        builder.Services.AddTransient<RecipeDetailsPage>();
+        builder.Services.AddSingleton<RecipeDetailsPage>();
         builder.Services.AddTransient<RecipeDetailsViewModel>();
 #if DEBUG
         builder.Logging.AddDebug();
