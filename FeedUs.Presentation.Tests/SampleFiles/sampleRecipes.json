@@ -1,5 +1,6 @@
 ﻿[
   {
+    "Id": 1,
     "Title": "Beans on Toast",
     "Ingredients": [
       {
@@ -15,12 +16,13 @@
     ]
   },
   {
+    "Id": 2,
     "Title": "Pasta",
     "Ingredients": [
       {
         "Name": "Pasta",
-        "Quantity": 1,
-        "Unit": "Cup"
+        "Quantity": 100,
+        "Unit": "Gram"
       },
       {
         "Name": "Chopped Tomatoes",
