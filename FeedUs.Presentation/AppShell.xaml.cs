@@ -1,9 +1,13 @@
-﻿namespace FeedUs.Presentation;
+﻿using FeedUs.Presentation.Views;
+
+namespace FeedUs.Presentation;
 
 public partial class AppShell : Shell
 {
-	public AppShell()
-	{
-		InitializeComponent();
-	}
+    public AppShell()
+    {
+        InitializeComponent();
+
+        Routing.RegisterRoute(nameof(RecipeListPage), typeof(RecipeListPage));
+    }
 }
