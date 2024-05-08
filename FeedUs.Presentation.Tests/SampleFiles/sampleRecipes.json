@@ -2,6 +2,7 @@
   {
     "Id": 1,
     "Title": "Beans on Toast",
+    "Description": "Simple classic",
     "Ingredients": [
       {
         "Name": "Baked Beans",
@@ -18,6 +19,7 @@
   {
     "Id": 2,
     "Title": "Pasta",
+    "Description": "Easy and quick meal",
     "Ingredients": [
       {
         "Name": "Pasta",
