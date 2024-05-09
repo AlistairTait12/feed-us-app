@@ -9,4 +9,5 @@ public class Recipe
     public string Title { get; set; }
     public string Description { get; set; }
     public IEnumerable<Ingredient> Ingredients { get; set; }
+    public IEnumerable<string> Steps { get; set; }
 }
