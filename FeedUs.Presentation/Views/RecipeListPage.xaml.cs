@@ -12,7 +12,7 @@ public partial class RecipeListPage : ContentPage
 
     protected override void OnAppearing()
     {
-        (BindingContext as RecipeListViewModel)?.LoadRecipesAsync();
         base.OnAppearing();
+        (BindingContext as RecipeListViewModel).LoadRecipesAsync();
     }
 }

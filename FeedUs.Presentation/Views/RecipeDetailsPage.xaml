@@ -8,12 +8,9 @@
              Title="RecipeDetailsPage">
     <VerticalStackLayout
         Padding="30,0">
-        <Label Text="{Binding Recipe.Title}"
-               FontSize="Title"/>
-        <Label Text="{Binding Recipe.Description}"
-               FontSize="Body"/>
-        <Label Text="Ingredients"
-               FontSize="Large"/>
+        <Label Text="{Binding Recipe.Title}" FontSize="Title"/>
+        <Label Text="{Binding Recipe.Description}" FontSize="Body"/>
+        <Label Text="Ingredients" FontSize="Large"/>
         <CollectionView ItemsSource="{Binding Recipe.Ingredients}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Ingredient">
@@ -27,17 +24,20 @@
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Row="0"
-                                   Text="{Binding Name}"
-                                   FontAttributes="Bold"
-                                   Grid.ColumnSpan="2"/>
-                            <Label Grid.Row="1"
-                                   Text="{Binding Quantity}"
-                                   Grid.Column="0"/>
-                            <Label Grid.Row="1"
-                                   Text="{Binding Unit}"
-                                   Grid.Column="1"/>
+                            <Label Grid.Row="0" Text="{Binding Name}" FontAttributes="Bold" Grid.ColumnSpan="2"/>
+                            <Label Grid.Row="1" Text="{Binding Quantity}" Grid.Column="0"/>
+                            <Label Grid.Row="1" Text="{Binding Unit}" Grid.Column="1"/>
                         </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Label Text="Steps" FontSize="Large"/>
+        <CollectionView ItemsSource="{Binding Recipe.Steps}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="x:String">
+                    <Border Stroke="LightBlue">
+                        <Label Text="{Binding .}" FontSize="Body"/>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

@@ -35,6 +35,11 @@ public class SimpleJsonDataAccessTests
                 [
                     new() { Name = "Baked Beans", Quantity = 1, Unit = UnitOfMeasure.Can },
                     new() { Name = "Bread", Quantity = 2, Unit = UnitOfMeasure.Slice }
+                ],
+                Steps = [
+                    "Toast bread",
+                    "Heat beans",
+                    "Pour beans over toast"
                 ]
             },
             new()
@@ -46,6 +51,11 @@ public class SimpleJsonDataAccessTests
                 [
                     new() { Name = "Pasta", Quantity = 100, Unit = UnitOfMeasure.Gram },
                     new() { Name = "Chopped Tomatoes", Quantity = 1, Unit = UnitOfMeasure.Can }
+                ],
+                Steps = [
+                    "Cook pasta for 12 minutes",
+                    "Drain pasta",
+                    "Add chopped tomatoes"
                 ]
             }
         };
@@ -71,6 +81,11 @@ public class SimpleJsonDataAccessTests
             [
                 new Ingredient { Name = "Baked Beans", Quantity = 1, Unit = UnitOfMeasure.Can },
                 new Ingredient { Name = "Bread", Quantity = 2, Unit = UnitOfMeasure.Slice }
+            ],
+            Steps = [
+                "Toast bread",
+                "Heat beans",
+                "Pour beans over toast"
             ]
         };
 
