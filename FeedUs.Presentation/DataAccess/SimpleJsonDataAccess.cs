@@ -13,7 +13,7 @@ public class SimpleJsonDataAccess : IDataAccess
     public async Task<Recipe> GetRecipe(int id)
     {
         var recipes = await GetRecipesAsync();
-        return recipes.FirstOrDefault(r => r.Id == id);
+        return recipes.FirstOrDefault(recipe => recipe.Id == id);
     }
 
     public async Task<IEnumerable<Recipe>> GetRecipesAsync()
@@ -26,6 +26,22 @@ public class SimpleJsonDataAccess : IDataAccess
         };
 
         var recipes = await JsonSerializer.DeserializeAsync<IEnumerable<Recipe>>(stream, options);
+        stream.Dispose();
         return recipes;
+    }
+
+    public async Task AddRecipeAsync(Recipe recipe)
+    {
+        var allRecipes = await GetRecipesAsync();
+        recipe.Id = allRecipes.Last().Id + 1;
+        var newList = allRecipes.Append(recipe);
+        var options = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            Converters = { new JsonStringEnumConverter() }
+        };
+        using var stream = new FileStream(_filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+        await JsonSerializer.SerializeAsync(stream, newList, options);
+        stream.Dispose();
     }
 }
