@@ -22,7 +22,7 @@ public partial class CreateRecipeViewModel : ObservableObject
     [ObservableProperty]
     string description;
 
-    public ObservableCollection<Ingredient> Ingredients = new();
+    public ObservableCollection<Ingredient> Ingredients { get; } = new();
 
     [ObservableProperty]
     string currentIngredientName;
@@ -33,7 +33,7 @@ public partial class CreateRecipeViewModel : ObservableObject
     [ObservableProperty]
     string currentIngredientUnit;
 
-    public ObservableCollection<string> Steps = new();
+    public ObservableCollection<string> Steps { get; } = new();
 
     [ObservableProperty]
     string currentStep;
@@ -66,7 +66,6 @@ public partial class CreateRecipeViewModel : ObservableObject
     [RelayCommand]
     public async Task CreateRecipeAsync()
     {
-        // Creates recipe
         var recipe = new Recipe
         {
             Title = Title,
@@ -76,5 +75,13 @@ public partial class CreateRecipeViewModel : ObservableObject
         };
 
         await _dataAccess.AddRecipeAsync(recipe);
+        await Shell.Current.GoToAsync("..");
     }
 }
+
+// TODO: All this stuff:
+// - Should be able to scroll on the create recipe page
+// - Should be able to remove ingredients and steps from the page
+// - Adding an ingredient or step should clear the input fields
+// - Dropdown for unit of measure
+// - Quantity should be a number entry and have a numeric keyboard type

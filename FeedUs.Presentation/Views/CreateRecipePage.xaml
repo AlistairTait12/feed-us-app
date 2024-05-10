@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:FeedUs.Presentation.ViewModels"
+             xmlns:model="clr-namespace:FeedUs.Presentation.Models"
+             x:Class="FeedUs.Presentation.Views.CreateRecipePage"
+             x:DataType="viewModel:CreateRecipeViewModel"
+             Title="CreateRecipePage">
+    <VerticalStackLayout>
+        <Entry Placeholder="Title" Text="{Binding Title}" />
+        <Entry Placeholder="Description" Text="{Binding Description}" />
+        <CollectionView ItemsSource="{Binding Ingredients}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Ingredient">
+                    <Border Stroke="MediumPurple">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="{Binding Name}" />
+                            <Label Grid.Column="1" Text="{Binding Quantity}"/>
+                            <Label Grid.Column="2" Text="{Binding Unit}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <CollectionView ItemsSource="{Binding Steps}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="x:String">
+                    <Border Stroke="LightBlue">
+                        <Label Grid.Column="0" Text="{Binding .}" />
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Entry Placeholder="Ingredient Name" Text="{Binding CurrentIngredientName}" />
+        <Entry Placeholder="Quantity" Text="{Binding CurrentIngredientAmount}" />
+        <Entry Placeholder="Unit" Text="{Binding CurrentIngredientUnit}" />
+        <Button Text="Add Ingredient" Command="{Binding AddIngredientCommand}" />
+        <Entry Placeholder="Step" Text="{Binding CurrentStep}" />
+        <Button Text="Add Step" Command="{Binding AddStepCommand}" />
+        <Button Text="Create Recipe" Command="{Binding CreateRecipeCommand}" />
+    </VerticalStackLayout>
+</ContentPage>
