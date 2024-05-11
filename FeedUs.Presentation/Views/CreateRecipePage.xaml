@@ -9,14 +9,16 @@
     <ScrollView>
         <VerticalStackLayout Padding="30,0">
             <Label Text="Create Recipe" FontSize="Large" />
-            <Entry Placeholder="Title" Text="{Binding Title}" />
-            <Entry Placeholder="Description" Text="{Binding Description}" />
+            <Entry Placeholder="Title" Text="{Binding Title}"
+                   Margin="0,10,0,0"/>
+            <Entry Placeholder="Description" Text="{Binding Description}"
+                   Margin="0,10,0,0"/>
             <Label Text="Ingredients" FontSize="Medium" />
             <CollectionView ItemsSource="{Binding Ingredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Ingredient">
                         <Border Stroke="MediumPurple">
-                            <Grid>
+                            <Grid ColumnSpacing="10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
@@ -40,8 +42,9 @@
                 <Entry Grid.Column="1" Placeholder="Quantity" Text="{Binding CurrentIngredientAmount}" />
                 <Entry Grid.Column="2" Placeholder="Unit" Text="{Binding CurrentIngredientUnit}" />
             </Grid>
-            <Button Text="Add Ingredient" Command="{Binding AddIngredientCommand}" />
-            <Label Text="Steps" FontSize="Medium" />
+            <Button Text="Add Ingredient" Command="{Binding AddIngredientCommand}"
+                    Margin="0,10,0,0"/>
+            <Label Text="Steps" FontSize="Medium" Margin="0,10,0,0"/>
             <CollectionView ItemsSource="{Binding Steps}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="x:String">
@@ -51,9 +54,12 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Entry Placeholder="Step" Text="{Binding CurrentStep}" />
-            <Button Text="Add Step" Command="{Binding AddStepCommand}" />
-            <Button Text="Create Recipe" Command="{Binding CreateRecipeCommand}" />
+            <Entry Placeholder="Step" Text="{Binding CurrentStep}"
+                   Margin="0,10,0,0"/>
+            <Button Text="Add Step" Command="{Binding AddStepCommand}"
+                    Margin="0,10,0,0"/>
+            <Button Text="Create Recipe" Command="{Binding CreateRecipeCommand}"
+                    Margin="0,10,0,0"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
