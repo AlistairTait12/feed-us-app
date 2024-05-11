@@ -9,6 +9,8 @@
             Spacing="25">
             <Button Text="Go to recipes"
                     Clicked="OnRecipesPageButtonClicked"/>
+            <Button Text="Create recipe"
+                    Clicked="OnCreateRecipeButtonClicked"/>
         </VerticalStackLayout>
     </ScrollView>
 
