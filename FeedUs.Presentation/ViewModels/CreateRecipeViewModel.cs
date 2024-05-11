@@ -31,7 +31,7 @@ public partial class CreateRecipeViewModel : ObservableObject
     string currentIngredientName;
 
     [ObservableProperty]
-    int currentIngredientAmount;
+    string currentIngredientAmount;
 
     [ObservableProperty]
     string currentIngredientUnit;
@@ -53,16 +53,18 @@ public partial class CreateRecipeViewModel : ObservableObject
     [RelayCommand]
     public void AddIngredient()
     {
+        var amount = double.Parse(CurrentIngredientAmount);
+
         var ingredient = new Ingredient
         {
             Name = CurrentIngredientName,
-            Quantity = CurrentIngredientAmount,
+            Quantity = amount,
             Unit = Enum.Parse<UnitOfMeasure>(CurrentIngredientUnit)
         };
 
         Ingredients.Add(ingredient);
         CurrentIngredientName = string.Empty;
-        CurrentIngredientAmount = 0;
+        CurrentIngredientAmount = string.Empty;
         CurrentIngredientUnit = string.Empty;
     }
 
@@ -103,7 +105,7 @@ public partial class CreateRecipeViewModel : ObservableObject
 
     partial void OnCurrentIngredientNameChanged(string value) => UpdateAddIngredientButtonEnabled();
 
-    partial void OnCurrentIngredientAmountChanged(int value) => UpdateAddIngredientButtonEnabled();
+    partial void OnCurrentIngredientAmountChanged(string value) => UpdateAddIngredientButtonEnabled();
 
     partial void OnCurrentIngredientUnitChanged(string value) => UpdateAddIngredientButtonEnabled();
 
@@ -112,7 +114,7 @@ public partial class CreateRecipeViewModel : ObservableObject
     {
         AddIngredientButtonEnabled = !string.IsNullOrWhiteSpace(CurrentIngredientName)
         && !string.IsNullOrWhiteSpace(CurrentIngredientUnit)
-        && CurrentIngredientAmount > 0;
+        && !string.IsNullOrEmpty(CurrentIngredientAmount);
     }
 
     partial void OnTitleChanged(string value) => UpdateCreateButtonEnabled();

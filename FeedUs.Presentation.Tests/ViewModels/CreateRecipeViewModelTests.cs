@@ -34,11 +34,11 @@ public class CreateRecipeViewModelTests
 
         // Act
         _viewModel.CurrentIngredientName = "Ingredient 1";
-        _viewModel.CurrentIngredientAmount = 100;
+        _viewModel.CurrentIngredientAmount = "100";
         _viewModel.CurrentIngredientUnit = "Gram";
         _viewModel.AddIngredient();
         _viewModel.CurrentIngredientName = "Ingredient 2";
-        _viewModel.CurrentIngredientAmount = 2;
+        _viewModel.CurrentIngredientAmount = "2";
         _viewModel.CurrentIngredientUnit = "Can";
         _viewModel.AddIngredient();
 
@@ -46,7 +46,7 @@ public class CreateRecipeViewModelTests
         _viewModel.Ingredients.Should().BeEquivalentTo(expected,
             assertionOptions => assertionOptions.WithStrictOrdering());
         _viewModel.CurrentIngredientName.Should().BeNullOrEmpty();
-        _viewModel.CurrentIngredientAmount.Should().Be(0);
+        _viewModel.CurrentIngredientAmount.Should().BeNullOrEmpty();
         _viewModel.CurrentIngredientUnit.Should().BeNullOrEmpty();
     }
 
@@ -79,7 +79,7 @@ public class CreateRecipeViewModelTests
         _viewModel.Title = "Recipe";
         _viewModel.Description = "Description";
         _viewModel.CurrentIngredientName = "Ingredient 1";
-        _viewModel.CurrentIngredientAmount = 100;
+        _viewModel.CurrentIngredientAmount = "100";
         _viewModel.CurrentIngredientUnit = "Gram";
         _viewModel.AddIngredient();
         _viewModel.CurrentStep = "Step 1";
@@ -100,11 +100,11 @@ public class CreateRecipeViewModelTests
         };
 
         _viewModel.CurrentIngredientName = "Ingredient 1";
-        _viewModel.CurrentIngredientAmount = 100;
+        _viewModel.CurrentIngredientAmount = "100";
         _viewModel.CurrentIngredientUnit = "Gram";
         _viewModel.AddIngredient();
         _viewModel.CurrentIngredientName = "Ingredient 2";
-        _viewModel.CurrentIngredientAmount = 2;
+        _viewModel.CurrentIngredientAmount = "2";
         _viewModel.CurrentIngredientUnit = "Can";
         _viewModel.AddIngredient();
 
