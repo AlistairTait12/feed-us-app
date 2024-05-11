@@ -46,7 +46,8 @@
                 </Grid.ColumnDefinitions>
                 <Entry Grid.Column="0" Placeholder="Ingredient Name" Text="{Binding CurrentIngredientName}" />
                 <Entry Grid.Column="1" Text="{Binding CurrentIngredientAmount}" />
-                <Entry Grid.Column="2" Placeholder="Unit" Text="{Binding CurrentIngredientUnit}" />
+                <Picker Grid.Column="2" SelectedItem="{Binding CurrentIngredientUnit}"
+                        x:Name="UnitPicker"/>
             </Grid>
             <Button Text="Add Ingredient" Command="{Binding AddIngredientCommand}"
                     Margin="0,10,0,0" IsEnabled="{Binding AddIngredientButtonEnabled}"/>
