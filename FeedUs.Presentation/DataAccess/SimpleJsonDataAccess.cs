@@ -33,7 +33,9 @@ public class SimpleJsonDataAccess : IDataAccess
     public async Task AddRecipeAsync(Recipe recipe)
     {
         var allRecipes = await GetRecipesAsync();
-        recipe.Id = allRecipes.Last().Id + 1;
+        recipe.Id = allRecipes.Any()
+            ? allRecipes.Last().Id + 1
+            : 1;
         var newList = allRecipes.Append(recipe);
         var options = new JsonSerializerOptions
         {

@@ -9,10 +9,17 @@ public static class MauiProgram
 {
     private static readonly string _filePath = Path.Combine(
         FileSystem.AppDataDirectory,
-        "sampleRecipes.json");
+        "recipe_storage.json");
 
     public static MauiApp CreateMauiApp()
     {
+        // Create the storage file if not existing
+        if (!File.Exists(_filePath))
+        {
+            var fileContent = "[]";
+            File.WriteAllText(_filePath, fileContent);
+        }
+
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
