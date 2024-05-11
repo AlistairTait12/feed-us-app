@@ -4,6 +4,7 @@ using FeedUs.Presentation.DataAccess;
 using FeedUs.Presentation.Enums;
 using FeedUs.Presentation.Models;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace FeedUs.Presentation.ViewModels;
 
@@ -14,6 +15,8 @@ public partial class CreateRecipeViewModel : ObservableObject
     public CreateRecipeViewModel(IDataAccess dataAccess)
     {
         _dataAccess = dataAccess;
+        Ingredients.CollectionChanged += OnIngredientsChanged;
+        Steps.CollectionChanged += OnStepsChanged;
     }
 
     [ObservableProperty]
@@ -41,6 +44,12 @@ public partial class CreateRecipeViewModel : ObservableObject
     [ObservableProperty]
     bool addStepButtonEnabled;
 
+    [ObservableProperty]
+    bool addIngredientButtonEnabled;
+
+    [ObservableProperty]
+    bool createButtonEnabled;
+
     [RelayCommand]
     public void AddIngredient()
     {
@@ -57,12 +66,6 @@ public partial class CreateRecipeViewModel : ObservableObject
     [RelayCommand]
     public void AddStep() => Steps.Add(CurrentStep);
 
-    partial void OnCurrentStepChanged(string value) => UpdateAddStepButtonEnabled();
-
-    [RelayCommand]
-    private void UpdateAddStepButtonEnabled() =>
-        AddStepButtonEnabled = !string.IsNullOrWhiteSpace(CurrentStep);
-
     [RelayCommand]
     public async Task CreateRecipeAsync()
     {
@@ -77,11 +80,45 @@ public partial class CreateRecipeViewModel : ObservableObject
         await _dataAccess.AddRecipeAsync(recipe);
         await Shell.Current.GoToAsync("..");
     }
-}
 
-// TODO: All this stuff:
-// - Should be able to scroll on the create recipe page
-// - Should be able to remove ingredients and steps from the page
-// - Adding an ingredient or step should clear the input fields
-// - Dropdown for unit of measure
-// - Quantity should be a number entry and have a numeric keyboard type
+    // Button enablement logic
+    partial void OnCurrentStepChanged(string value) => UpdateAddStepButtonEnabled();
+
+    [RelayCommand]
+    private void UpdateAddStepButtonEnabled() =>
+        AddStepButtonEnabled = !string.IsNullOrWhiteSpace(CurrentStep);
+
+    partial void OnCurrentIngredientNameChanged(string value) => UpdateAddIngredientButtonEnabled();
+
+    partial void OnCurrentIngredientAmountChanged(int value) => UpdateAddIngredientButtonEnabled();
+
+    partial void OnCurrentIngredientUnitChanged(string value) => UpdateAddIngredientButtonEnabled();
+
+    [RelayCommand]
+    private void UpdateAddIngredientButtonEnabled()
+    {
+        AddIngredientButtonEnabled = !string.IsNullOrWhiteSpace(CurrentIngredientName)
+        && !string.IsNullOrWhiteSpace(CurrentIngredientUnit)
+        && CurrentIngredientAmount > 0;
+    }
+
+    partial void OnTitleChanged(string value) => UpdateCreateButtonEnabled();
+
+    private void OnIngredientsChanged(object sender, NotifyCollectionChangedEventArgs e) => UpdateCreateButtonEnabled();
+
+    private void OnStepsChanged(object sender, NotifyCollectionChangedEventArgs e) => UpdateCreateButtonEnabled();
+
+    [RelayCommand]
+    private void UpdateCreateButtonEnabled()
+    {
+        CreateButtonEnabled = !string.IsNullOrWhiteSpace(Title)
+        && Steps.Count > 0
+        && Ingredients.Count > 0;
+    }
+
+    public void OnViewDisappearing()
+    {
+        Ingredients.CollectionChanged -= OnIngredientsChanged;
+        Steps.CollectionChanged -= OnStepsChanged;
+    }
+}

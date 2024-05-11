@@ -9,4 +9,10 @@ public partial class CreateRecipePage : ContentPage
         InitializeComponent();
         BindingContext = viewModel;
     }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        (BindingContext as CreateRecipeViewModel)?.OnViewDisappearing();
+    }
 }

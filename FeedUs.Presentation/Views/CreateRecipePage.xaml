@@ -11,7 +11,7 @@
             <Label Text="Create Recipe" FontSize="Large" />
             <Entry Placeholder="Title" Text="{Binding Title}"
                    Margin="0,10,0,0"/>
-            <Entry Placeholder="Description" Text="{Binding Description}"
+            <Entry Placeholder="Description (Optional)" Text="{Binding Description}"
                    Margin="0,10,0,0"/>
             <Label Text="Ingredients" FontSize="Medium" />
             <CollectionView ItemsSource="{Binding Ingredients}">
@@ -43,7 +43,7 @@
                 <Entry Grid.Column="2" Placeholder="Unit" Text="{Binding CurrentIngredientUnit}" />
             </Grid>
             <Button Text="Add Ingredient" Command="{Binding AddIngredientCommand}"
-                    Margin="0,10,0,0"/>
+                    Margin="0,10,0,0" IsEnabled="{Binding AddIngredientButtonEnabled}"/>
             <Label Text="Steps" FontSize="Medium" Margin="0,10,0,0"/>
             <CollectionView ItemsSource="{Binding Steps}">
                 <CollectionView.ItemTemplate>
@@ -57,9 +57,9 @@
             <Entry Placeholder="Step" Text="{Binding CurrentStep}"
                    Margin="0,10,0,0"/>
             <Button Text="Add Step" Command="{Binding AddStepCommand}"
-                    Margin="0,10,0,0"/>
+                    Margin="0,10,0,0" IsEnabled="{Binding AddStepButtonEnabled}"/>
             <Button Text="Create Recipe" Command="{Binding CreateRecipeCommand}"
-                    Margin="0,10,0,0"/>
+                    Margin="0,10,0,0" IsEnabled="{Binding CreateButtonEnabled}"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
