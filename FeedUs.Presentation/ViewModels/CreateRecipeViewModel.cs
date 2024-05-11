@@ -61,10 +61,23 @@ public partial class CreateRecipeViewModel : ObservableObject
         };
 
         Ingredients.Add(ingredient);
+        CurrentIngredientName = string.Empty;
+        CurrentIngredientAmount = 0;
+        CurrentIngredientUnit = string.Empty;
     }
 
     [RelayCommand]
-    public void AddStep() => Steps.Add(CurrentStep);
+    public void RemoveIngredient(Ingredient ingredient) => Ingredients.Remove(ingredient);
+
+    [RelayCommand]
+    public void AddStep()
+    {
+        Steps.Add(CurrentStep);
+        CurrentStep = string.Empty;
+    }
+
+    [RelayCommand]
+    public void RemoveStep(string step) => Steps.Remove(step);
 
     [RelayCommand]
     public async Task CreateRecipeAsync()

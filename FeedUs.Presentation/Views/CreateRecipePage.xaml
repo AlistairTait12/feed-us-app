@@ -18,6 +18,12 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Ingredient">
                         <Border Stroke="MediumPurple">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:CreateRecipeViewModel}},
+                                        Path=RemoveIngredientCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
                             <Grid ColumnSpacing="10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -39,7 +45,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Entry Grid.Column="0" Placeholder="Ingredient Name" Text="{Binding CurrentIngredientName}" />
-                <Entry Grid.Column="1" Placeholder="Quantity" Text="{Binding CurrentIngredientAmount}" />
+                <Entry Grid.Column="1" Text="{Binding CurrentIngredientAmount}" />
                 <Entry Grid.Column="2" Placeholder="Unit" Text="{Binding CurrentIngredientUnit}" />
             </Grid>
             <Button Text="Add Ingredient" Command="{Binding AddIngredientCommand}"
@@ -49,6 +55,12 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="x:String">
                         <Border Stroke="LightBlue">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:CreateRecipeViewModel}},
+                                        Path=RemoveStepCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
                             <Label Grid.Column="0" Text="{Binding .}" />
                         </Border>
                     </DataTemplate>

@@ -45,6 +45,9 @@ public class CreateRecipeViewModelTests
         // Assert
         _viewModel.Ingredients.Should().BeEquivalentTo(expected,
             assertionOptions => assertionOptions.WithStrictOrdering());
+        _viewModel.CurrentIngredientName.Should().BeNullOrEmpty();
+        _viewModel.CurrentIngredientAmount.Should().Be(0);
+        _viewModel.CurrentIngredientUnit.Should().BeNullOrEmpty();
     }
 
     [Test]
@@ -65,8 +68,10 @@ public class CreateRecipeViewModelTests
 
         // Assert
         _viewModel.Steps.Should().BeEquivalentTo(expected);
+        _viewModel.CurrentStep.Should().BeNullOrEmpty();
     }
 
+    [Ignore("Test fails because of null Shell in unit tests")]
     [Test]
     public async Task CreateRecipe_CreatesRecipe()
     {
@@ -83,5 +88,52 @@ public class CreateRecipeViewModelTests
 
         // Assert
         A.CallTo(() => _dataAccess.AddRecipeAsync(A<Recipe>.That.Matches(r => r.Title == "Recipe"))).MustHaveHappened();
+    }
+
+    [Test]
+    public void RemoveIngredient_RemovesIngredientFromIngredients()
+    {
+        // Arrange
+        var expected = new List<Ingredient>
+        {
+            new() { Name = "Ingredient 2", Quantity = 2, Unit = UnitOfMeasure.Can }
+        };
+
+        _viewModel.CurrentIngredientName = "Ingredient 1";
+        _viewModel.CurrentIngredientAmount = 100;
+        _viewModel.CurrentIngredientUnit = "Gram";
+        _viewModel.AddIngredient();
+        _viewModel.CurrentIngredientName = "Ingredient 2";
+        _viewModel.CurrentIngredientAmount = 2;
+        _viewModel.CurrentIngredientUnit = "Can";
+        _viewModel.AddIngredient();
+
+        // Act
+        _viewModel.RemoveIngredient(_viewModel.Ingredients[0]);
+
+        // Assert
+        _viewModel.Ingredients.Should().BeEquivalentTo(expected);
+    }
+
+    // TODO: RemoveStep just removes first matching string, not necessarily the one that was clicked
+    [Test]
+    public void RemoveStep_RemovesStepFromSteps()
+    {
+        // Arrange
+        var expected = new List<string>
+        {
+            "Step 2"
+        };
+
+        _viewModel.CurrentStep = "Step 1";
+        _viewModel.AddStep();
+        _viewModel.CurrentStep = "Step 2";
+        _viewModel.AddStep();
+
+        // Act
+        _viewModel.RemoveStep(_viewModel.Steps[0]);
+
+        // Assert
+        _viewModel.Steps.Should().BeEquivalentTo(expected);
     }
 }
