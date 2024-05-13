@@ -42,8 +42,24 @@ public class SimpleJsonDataAccess : IDataAccess
             WriteIndented = true,
             Converters = { new JsonStringEnumConverter() }
         };
-        using var stream = new FileStream(_filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+        using var stream = new FileStream(_filePath, FileMode.Open,
+            FileAccess.ReadWrite, FileShare.Read);
         await JsonSerializer.SerializeAsync(stream, newList, options);
+        stream.Dispose();
+    }
+
+    public async Task DeleteRecipeAsync(int id)
+    {
+        var recipes = (await GetRecipesAsync()).ToList();
+        recipes.Remove(recipes.First(recipe => recipe.Id == id));
+        var options = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            Converters = { new JsonStringEnumConverter() }
+        };
+        using var stream = new FileStream(_filePath, FileMode.Truncate,
+            FileAccess.ReadWrite, FileShare.Read);
+        await JsonSerializer.SerializeAsync(stream, recipes, options);
         stream.Dispose();
     }
 }

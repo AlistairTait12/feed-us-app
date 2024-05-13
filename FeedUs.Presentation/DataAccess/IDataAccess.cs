@@ -7,6 +7,6 @@ public interface IDataAccess
     Task<IEnumerable<Recipe>> GetRecipesAsync();
     Task<Recipe> GetRecipe(int id);
     Task AddRecipeAsync(Recipe recipe);
+    Task DeleteRecipeAsync(int id);
     // TODO: Task UpdateRecipeAsync(Recipe recipe);
-    // TODO: Task DeleteRecipeAsync(int id);
 }

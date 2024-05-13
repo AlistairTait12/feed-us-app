@@ -149,4 +149,37 @@ public class SimpleJsonDataAccessTests
         recipes.Last().Should().BeEquivalentTo(expected,
             assertionOptions => assertionOptions.WithStrictOrdering());
     }
+
+    [Test]
+    public async Task DeleteRecipe_RemovesRecipeFromStorage()
+    {
+        // Arrange
+        var expected = new List<Recipe>
+        {
+            new()
+            {
+                Id = 2,
+                Title = "Pasta",
+                Description = "Easy and quick meal",
+                Ingredients =
+                [
+                    new() { Name = "Pasta", Quantity = 100, Unit = UnitOfMeasure.Gram },
+                    new() { Name = "Chopped Tomatoes", Quantity = 1, Unit = UnitOfMeasure.Can }
+                ],
+                Steps = [
+                    "Cook pasta for 12 minutes",
+                    "Drain pasta",
+                    "Add chopped tomatoes"
+                ]
+            }
+        };
+
+        // Act
+        await _dataAccess.DeleteRecipeAsync(1);
+        var recipes = await _dataAccess.GetRecipesAsync();
+
+        // Assert
+        recipes.Should().BeEquivalentTo(expected,
+            assertionOptions => assertionOptions.WithStrictOrdering());
+    }
 }
