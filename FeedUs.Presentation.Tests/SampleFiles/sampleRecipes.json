@@ -4,8 +4,16 @@
     "Title": "Beans on Toast",
     "Description": "Simple classic",
     "Ingredients": [
-      { "Name": "Baked Beans", "Quantity": 1, "Unit": "Can" },
-      { "Name": "Bread", "Quantity": 2, "Unit": "Slice" }
+      {
+        "Name": "Baked Beans",
+        "Quantity": 1,
+        "Unit": "Can"
+      },
+      {
+        "Name": "Bread",
+        "Quantity": 2,
+        "Unit": "Slice"
+      }
     ],
     "Steps": [
       "Toast bread",
@@ -18,8 +26,16 @@
     "Title": "Pasta",
     "Description": "Easy and quick meal",
     "Ingredients": [
-      { "Name": "Pasta", "Quantity": 100, "Unit": "Gram" },
-      { "Name": "Chopped Tomatoes", "Quantity": 1, "Unit": "Can" }
+      {
+        "Name": "Pasta",
+        "Quantity": 100,
+        "Unit": "Gram"
+      },
+      {
+        "Name": "Chopped Tomatoes",
+        "Quantity": 1,
+        "Unit": "Can"
+      }
     ],
     "Steps": [
       "Cook pasta for 12 minutes",
