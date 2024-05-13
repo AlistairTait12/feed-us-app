@@ -21,7 +21,16 @@ public partial class RecipeDetailsViewModel : ObservableObject
     [RelayCommand]
     public async Task DeleteRecipeAsync()
     {
-        await _dataAccess.DeleteRecipeAsync(recipe.Id);
-        await Shell.Current.GoToAsync("..");
+        bool answer = await Shell.Current.DisplayAlert(
+            "Confirmation",
+            "Are you sure you want to delete the recipe?",
+            "Yes",
+            "No");
+
+        if (answer)
+        {
+            await _dataAccess.DeleteRecipeAsync(recipe.Id);
+            await Shell.Current.GoToAsync("..");
+        }
     }
 }

@@ -43,8 +43,11 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
         <Button Text="Delete"
-                Command="{Binding DeleteRecipeCommand}"/>
+                Margin="0,10,0,0"
+                Command="{Binding DeleteRecipeCommand}"
+                Background="Red"/>
         <Button Text="Back"
+                Margin="0,10,0,0"
                 Command="{Binding GoBackCommand}"/>
     </VerticalStackLayout>
 </ContentPage>
