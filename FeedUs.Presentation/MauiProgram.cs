@@ -1,4 +1,5 @@
-﻿using FeedUs.Presentation.DataAccess;
+﻿using CommunityToolkit.Maui;
+using FeedUs.Presentation.DataAccess;
 using FeedUs.Presentation.ViewModels;
 using FeedUs.Presentation.Views;
 using Microsoft.Extensions.Logging;
@@ -23,6 +24,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
