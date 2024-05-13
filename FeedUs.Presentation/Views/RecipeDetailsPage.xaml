@@ -42,6 +42,8 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Button Text="Delete"
+                Command="{Binding DeleteRecipeCommand}"/>
         <Button Text="Back"
                 Command="{Binding GoBackCommand}"/>
     </VerticalStackLayout>
