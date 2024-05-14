@@ -27,6 +27,7 @@ public class UpdateRecipeViewModelTests
         // Assert
         A.CallTo(() => dataAccess.UpdateRecipeAsync(A<Recipe>.That.Matches(r => r.Id == recipe.Id)))
             .MustHaveHappenedOnceExactly();
-        A.CallTo(() => navigationWrapper.GoToAsync("..")).MustHaveHappenedOnceExactly();
+        A.CallTo(() => navigationWrapper.GoToAsync("..", A<Dictionary<string, object>>.Ignored))
+            .MustHaveHappenedOnceExactly();
     }
 }
