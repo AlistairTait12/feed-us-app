@@ -1,6 +1,8 @@
-﻿
+﻿using System.Diagnostics.CodeAnalysis;
+
 namespace FeedUs.Presentation.Wrappers;
 
+[ExcludeFromCodeCoverage]
 public class NavigationWrapper : INavigationWrapper
 {
     public async Task GoToAsync(string uri) =>

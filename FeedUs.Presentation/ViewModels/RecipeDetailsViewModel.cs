@@ -29,7 +29,7 @@ public partial class RecipeDetailsViewModel : ObservableObject
     [RelayCommand]
     public async Task DeleteRecipeAsync()
     {
-        bool userDidConfirm = await _navigationWrapper.DisplayAlert(
+        var userDidConfirm = await _navigationWrapper.DisplayAlert(
             "Confirmation",
             "Are you sure you want to delete the recipe?",
             "Yes",
