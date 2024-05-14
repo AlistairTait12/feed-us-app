@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using FeedUs.Presentation.DataAccess;
 using FeedUs.Presentation.Enums;
 using FeedUs.Presentation.Models;
+using FeedUs.Presentation.Wrappers;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
@@ -11,10 +12,12 @@ namespace FeedUs.Presentation.ViewModels;
 public partial class CreateRecipeViewModel : ObservableObject
 {
     private readonly IDataAccess _dataAccess;
+    private readonly INavigationWrapper _navigationWrapper;
 
-    public CreateRecipeViewModel(IDataAccess dataAccess)
+    public CreateRecipeViewModel(IDataAccess dataAccess, INavigationWrapper navigationWrapper)
     {
         _dataAccess = dataAccess;
+        _navigationWrapper = navigationWrapper;
         Ingredients.CollectionChanged += OnIngredientsChanged;
         Steps.CollectionChanged += OnStepsChanged;
     }
@@ -93,7 +96,7 @@ public partial class CreateRecipeViewModel : ObservableObject
         };
 
         await _dataAccess.AddRecipeAsync(recipe);
-        await Shell.Current.GoToAsync("..");
+        await _navigationWrapper.GoToAsync("..");
     }
 
     // Button enablement logic

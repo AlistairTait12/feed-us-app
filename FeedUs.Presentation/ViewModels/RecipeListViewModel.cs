@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using FeedUs.Presentation.DataAccess;
 using FeedUs.Presentation.Models;
 using FeedUs.Presentation.Views;
+using FeedUs.Presentation.Wrappers;
 using System.Collections.ObjectModel;
 
 namespace FeedUs.Presentation.ViewModels;
@@ -10,10 +11,15 @@ namespace FeedUs.Presentation.ViewModels;
 public partial class RecipeListViewModel : ObservableObject
 {
     private readonly IDataAccess _dataAccess;
+    private readonly INavigationWrapper _navigationWrapper;
 
     public ObservableCollection<Recipe> Recipes { get; } = new();
 
-    public RecipeListViewModel(IDataAccess dataAccess) => _dataAccess = dataAccess;
+    public RecipeListViewModel(IDataAccess dataAccess, INavigationWrapper navigationWrapper)
+    {
+        _dataAccess = dataAccess;
+        _navigationWrapper = navigationWrapper;
+    }
 
     [RelayCommand]
     public async Task LoadRecipesAsync()
@@ -23,7 +29,7 @@ public partial class RecipeListViewModel : ObservableObject
         // But the following logic will...
         if (Recipes.Count is not 0)
         {
-            Recipes.Clear(); 
+            Recipes.Clear();
         }
 
         foreach (var recipe in recipes)
@@ -35,7 +41,7 @@ public partial class RecipeListViewModel : ObservableObject
     [RelayCommand]
     public async Task GoToRecipeDetails(Recipe recipe)
     {
-        await Shell.Current.GoToAsync(nameof(RecipeDetailsPage), false,
+        await _navigationWrapper.GoToAsync(nameof(RecipeDetailsPage),
             new Dictionary<string, object>
             {
                 { "Recipe", recipe }

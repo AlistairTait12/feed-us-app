@@ -3,6 +3,7 @@ using FeedUs.Presentation.DataAccess;
 using FeedUs.Presentation.Enums;
 using FeedUs.Presentation.Models;
 using FeedUs.Presentation.ViewModels;
+using FeedUs.Presentation.Wrappers;
 using FluentAssertions;
 using System.Diagnostics.CodeAnalysis;
 
@@ -13,13 +14,15 @@ namespace FeedUs.Presentation.Tests.ViewModels;
 public class CreateRecipeViewModelTests
 {
     private IDataAccess _dataAccess;
+    private INavigationWrapper _navigationWrapper;
     private CreateRecipeViewModel _viewModel;
 
     [SetUp]
     public void SetUp()
     {
         _dataAccess = A.Fake<IDataAccess>();
-        _viewModel = new CreateRecipeViewModel(_dataAccess);
+        _navigationWrapper = A.Fake<INavigationWrapper>();
+        _viewModel = new (_dataAccess, _navigationWrapper);
     }
 
     [Test]
@@ -71,7 +74,6 @@ public class CreateRecipeViewModelTests
         _viewModel.CurrentStep.Should().BeNullOrEmpty();
     }
 
-    [Ignore("Test fails because of null Shell in unit tests")]
     [Test]
     public async Task CreateRecipe_CreatesRecipe()
     {
@@ -87,7 +89,11 @@ public class CreateRecipeViewModelTests
         await _viewModel.CreateRecipeAsync();
 
         // Assert
-        A.CallTo(() => _dataAccess.AddRecipeAsync(A<Recipe>.That.Matches(r => r.Title == "Recipe"))).MustHaveHappened();
+        A.CallTo(() => _dataAccess
+            .AddRecipeAsync(A<Recipe>.That.Matches(r => r.Title == "Recipe")))
+            .MustHaveHappenedOnceExactly();
+        A.CallTo(() => _navigationWrapper.GoToAsync(".."))
+            .MustHaveHappenedOnceExactly();
     }
 
     [Test]
