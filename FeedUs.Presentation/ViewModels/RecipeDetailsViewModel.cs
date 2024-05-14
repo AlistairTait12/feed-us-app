@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FeedUs.Presentation.DataAccess;
 using FeedUs.Presentation.Models;
+using FeedUs.Presentation.Wrappers;
 
 namespace FeedUs.Presentation.ViewModels;
 
@@ -11,28 +12,33 @@ namespace FeedUs.Presentation.ViewModels;
 public partial class RecipeDetailsViewModel : ObservableObject
 {
     private readonly IDataAccess _dataAccess;
+    private readonly INavigationWrapper _navigationWrapper;
 
-    public RecipeDetailsViewModel(IDataAccess dataAccess) => _dataAccess = dataAccess;
+    public RecipeDetailsViewModel(IDataAccess dataAccess, INavigationWrapper navigationWrapper)
+    {
+        _dataAccess = dataAccess;
+        _navigationWrapper = navigationWrapper;
+    }
 
     [ObservableProperty]
     Recipe recipe;
 
     [RelayCommand]
-    public async Task GoBackAsync() => await Shell.Current.GoToAsync("..");
+    public async Task GoBackAsync() => await _navigationWrapper.GoToAsync("..");
 
     [RelayCommand]
     public async Task DeleteRecipeAsync()
     {
-        bool answer = await Shell.Current.DisplayAlert(
+        bool userDidConfirm = await _navigationWrapper.DisplayAlert(
             "Confirmation",
             "Are you sure you want to delete the recipe?",
             "Yes",
             "No");
 
-        if (answer)
+        if (userDidConfirm)
         {
             await _dataAccess.DeleteRecipeAsync(Recipe.Id);
-            await Shell.Current.GoToAsync("..");
+            await _navigationWrapper.GoToAsync("..");
             await DisplayConfirmationToast();
         }
     }
