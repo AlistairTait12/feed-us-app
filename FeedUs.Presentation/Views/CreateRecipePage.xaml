@@ -72,7 +72,8 @@
             <Button Text="Add Step" Command="{Binding AddStepCommand}"
                     Margin="0,10,0,0" IsEnabled="{Binding AddStepButtonEnabled}"/>
             <Button Text="Create Recipe" Command="{Binding CreateRecipeCommand}"
-                    Margin="0,10,0,0" IsEnabled="{Binding CreateButtonEnabled}"/>
+                    Margin="0,10,0,0" IsEnabled="{Binding CreateButtonEnabled}"
+                    BackgroundColor="Lime"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
