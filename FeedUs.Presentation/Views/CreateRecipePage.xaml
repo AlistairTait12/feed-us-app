@@ -40,17 +40,19 @@
             </CollectionView>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
                 <Entry Grid.Column="0" Placeholder="Ingredient Name" Text="{Binding CurrentIngredientName}" />
                 <Entry Grid.Column="1" Text="{Binding CurrentIngredientAmount}" />
                 <Picker Grid.Column="2" SelectedItem="{Binding CurrentIngredientUnit}"
                         x:Name="UnitPicker"/>
+                <Button Text="Add Ingredient" Command="{Binding AddIngredientCommand}"
+                        IsEnabled="{Binding AddIngredientButtonEnabled}"
+                        Grid.Column="3"/>
             </Grid>
-            <Button Text="Add Ingredient" Command="{Binding AddIngredientCommand}"
-                    Margin="0,10,0,0" IsEnabled="{Binding AddIngredientButtonEnabled}"/>
             <Label Text="Steps" FontSize="Medium" Margin="0,10,0,0"/>
             <CollectionView ItemsSource="{Binding Steps}">
                 <CollectionView.ItemTemplate>
@@ -67,10 +69,17 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Entry Placeholder="Step" Text="{Binding CurrentStep}"
-                   Margin="0,10,0,0"/>
-            <Button Text="Add Step" Command="{Binding AddStepCommand}"
-                    Margin="0,10,0,0" IsEnabled="{Binding AddStepButtonEnabled}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Entry Placeholder="Step" Text="{Binding CurrentStep}"
+                       Margin="0,10,0,0" Grid.Column="0"/>
+                <Button Text="Add Step" Command="{Binding AddStepCommand}"
+                        Margin="0,10,0,0" IsEnabled="{Binding AddStepButtonEnabled}"
+                        Grid.Column="1"/>
+            </Grid>
             <Button Text="Create Recipe" Command="{Binding CreateRecipeCommand}"
                     Margin="0,10,0,0" IsEnabled="{Binding CreateButtonEnabled}"
                     BackgroundColor="Lime"/>
