@@ -8,6 +8,13 @@ public class SimpleJsonDataAccess : IDataAccess
 {
     private readonly string _filePath;
 
+    private readonly JsonSerializerOptions _options = new()
+    {
+        PropertyNameCaseInsensitive = true,
+        WriteIndented = true,
+        Converters = { new JsonStringEnumConverter() }
+    };
+
     public SimpleJsonDataAccess(string filePath) => _filePath = filePath;
 
     public async Task<Recipe> GetRecipe(int id)
@@ -19,13 +26,8 @@ public class SimpleJsonDataAccess : IDataAccess
     public async Task<IEnumerable<Recipe>> GetRecipesAsync()
     {
         using var stream = new FileStream(_filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-        var options = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true,
-            Converters = { new JsonStringEnumConverter() }
-        };
-
-        var recipes = await JsonSerializer.DeserializeAsync<IEnumerable<Recipe>>(stream, options);
+        var recipes = await JsonSerializer.DeserializeAsync<IEnumerable<Recipe>>(
+            stream, _options);
         stream.Dispose();
         return recipes;
     }
@@ -37,29 +39,32 @@ public class SimpleJsonDataAccess : IDataAccess
             ? allRecipes.Last().Id + 1
             : 1;
         var newList = allRecipes.Append(recipe);
-        var options = new JsonSerializerOptions
-        {
-            WriteIndented = true,
-            Converters = { new JsonStringEnumConverter() }
-        };
-        using var stream = new FileStream(_filePath, FileMode.Open,
-            FileAccess.ReadWrite, FileShare.Read);
-        await JsonSerializer.SerializeAsync(stream, newList, options);
-        stream.Dispose();
+        await WriteToFile(newList);
     }
 
     public async Task DeleteRecipeAsync(int id)
     {
         var recipes = (await GetRecipesAsync()).ToList();
         recipes.Remove(recipes.First(recipe => recipe.Id == id));
-        var options = new JsonSerializerOptions
+        await WriteToFile(recipes);
+    }
+
+    public async Task UpdateRecipeAsync(Recipe recipe)
+    {
+        var recipes = (await GetRecipesAsync()).ToList();
+        var updatedRecipeIndex = recipes.FindIndex(r => r.Id == recipe.Id);
+        if (updatedRecipeIndex >= 0)
         {
-            WriteIndented = true,
-            Converters = { new JsonStringEnumConverter() }
-        };
+            recipes[updatedRecipeIndex] = recipe;
+        }
+        await WriteToFile(recipes);
+    }
+
+    private async Task WriteToFile(IEnumerable<Recipe> recipes)
+    {
         using var stream = new FileStream(_filePath, FileMode.Truncate,
             FileAccess.ReadWrite, FileShare.Read);
-        await JsonSerializer.SerializeAsync(stream, recipes, options);
+        await JsonSerializer.SerializeAsync(stream, recipes, _options);
         stream.Dispose();
     }
 }

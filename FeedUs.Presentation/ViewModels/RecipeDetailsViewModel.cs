@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FeedUs.Presentation.DataAccess;
 using FeedUs.Presentation.Models;
+using FeedUs.Presentation.Views;
 using FeedUs.Presentation.Wrappers;
 
 namespace FeedUs.Presentation.ViewModels;
@@ -39,12 +40,23 @@ public partial class RecipeDetailsViewModel : ObservableObject
         {
             await _dataAccess.DeleteRecipeAsync(Recipe.Id);
             await _navigationWrapper.GoToAsync("..");
-            await DisplayConfirmationToast();
+            await DisplayDeletedConfirmationToast();
         }
     }
 
+    [RelayCommand]
+    public async Task GoToUpdateRecipe()
+    {
+        var parameters = new Dictionary<string, object>
+        {
+            { "Recipe", Recipe }
+        };
+
+        await _navigationWrapper.GoToAsync(nameof(UpdateRecipePage), parameters);
+    }
+
     // TODO: Seems to work fine on Android, but not on Windows
-    private async Task DisplayConfirmationToast()
+    private async Task DisplayDeletedConfirmationToast()
     {
         var toastContent = $"Recipe {Recipe.Title} deleted";
         var toast = Toast.Make(toastContent,

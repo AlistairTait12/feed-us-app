@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:FeedUs.Presentation.ViewModels"
+             xmlns:model="clr-namespace:FeedUs.Presentation.Models"
+             x:DataType="viewModel:UpdateRecipeViewModel"
+             x:Class="FeedUs.Presentation.Views.UpdateRecipePage"
+             Title="UpdateRecipePage">
+    <VerticalStackLayout>
+        <Entry Placeholder="Title" Text="{Binding Recipe.Title}" />
+        <Entry Placeholder="Description" Text="{Binding Recipe.Description}" />
+        <Button Text="Update" Command="{Binding UpdateRecipeCommand}" />
+    </VerticalStackLayout>
+</ContentPage>

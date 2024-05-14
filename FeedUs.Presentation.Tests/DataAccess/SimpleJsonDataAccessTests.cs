@@ -87,8 +87,8 @@ public class SimpleJsonDataAccessTests
             Description = "Simple classic",
             Ingredients =
             [
-                new Ingredient { Name = "Baked Beans", Quantity = 1, Unit = UnitOfMeasure.Can },
-                new Ingredient { Name = "Bread", Quantity = 2, Unit = UnitOfMeasure.Slice }
+                new() { Name = "Baked Beans", Quantity = 1, Unit = UnitOfMeasure.Can },
+                new() { Name = "Bread", Quantity = 2, Unit = UnitOfMeasure.Slice }
             ],
             Steps = [
                 "Toast bread",
@@ -115,8 +115,8 @@ public class SimpleJsonDataAccessTests
             Description = "Simple classic",
             Ingredients =
             [
-                new Ingredient { Name = "Cheese", Quantity = 1, Unit = UnitOfMeasure.Slice },
-                new Ingredient { Name = "Bread", Quantity = 2, Unit = UnitOfMeasure.Slice }
+                new() { Name = "Cheese", Quantity = 1, Unit = UnitOfMeasure.Slice },
+                new() { Name = "Bread", Quantity = 2, Unit = UnitOfMeasure.Slice }
             ],
             Steps = [
                 "Toast bread",
@@ -131,8 +131,8 @@ public class SimpleJsonDataAccessTests
             Description = "Simple classic",
             Ingredients =
             [
-                new Ingredient { Name = "Cheese", Quantity = 1, Unit = UnitOfMeasure.Slice },
-                new Ingredient { Name = "Bread", Quantity = 2, Unit = UnitOfMeasure.Slice }
+                new() { Name = "Cheese", Quantity = 1, Unit = UnitOfMeasure.Slice },
+                new() { Name = "Bread", Quantity = 2, Unit = UnitOfMeasure.Slice }
             ],
             Steps = [
                 "Toast bread",
@@ -181,5 +181,34 @@ public class SimpleJsonDataAccessTests
         // Assert
         recipes.Should().BeEquivalentTo(expected,
             assertionOptions => assertionOptions.WithStrictOrdering());
+    }
+
+    [Test]
+    public async Task UpdateRecipe_UpdatesExistingRecipeInStorage()
+    {
+        // Arrange
+        var expected = new Recipe
+        {
+            Id = 1,
+            Title = "Beans on Toast",
+            Description = "I hate this dish",
+            Ingredients =
+            [
+                new() { Name = "Baked Beans", Quantity = 1, Unit = UnitOfMeasure.Can },
+                new() { Name = "Bread", Quantity = 2, Unit = UnitOfMeasure.Slice }
+            ],
+            Steps = [
+                "Toast bread",
+                "Heat beans",
+                "Pour beans over toast"
+            ]
+        };
+
+        // Act
+        await _dataAccess.UpdateRecipeAsync(expected);
+
+        // Assert
+        var recipe = await _dataAccess.GetRecipe(1);
+        recipe.Should().BeEquivalentTo(expected);
     }
 }
