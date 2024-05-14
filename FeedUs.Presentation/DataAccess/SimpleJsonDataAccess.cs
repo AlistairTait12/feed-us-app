@@ -62,4 +62,23 @@ public class SimpleJsonDataAccess : IDataAccess
         await JsonSerializer.SerializeAsync(stream, recipes, options);
         stream.Dispose();
     }
+
+    public async Task UpdateRecipeAsync(Recipe recipe)
+    {
+        var recipes = (await GetRecipesAsync()).ToList();
+        var updatedRecipeIndex = recipes.FindIndex(r => r.Id == recipe.Id);
+        if (updatedRecipeIndex >= 0)
+        {
+            recipes[updatedRecipeIndex] = recipe;
+        }
+        var options = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            Converters = { new JsonStringEnumConverter() }
+        };
+        using var stream = new FileStream(_filePath, FileMode.Truncate,
+            FileAccess.ReadWrite, FileShare.Read);
+        await JsonSerializer.SerializeAsync(stream, recipes, options);
+        stream.Dispose();
+    }
 }

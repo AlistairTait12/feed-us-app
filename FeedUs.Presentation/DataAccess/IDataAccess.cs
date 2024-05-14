@@ -8,5 +8,5 @@ public interface IDataAccess
     Task<Recipe> GetRecipe(int id);
     Task AddRecipeAsync(Recipe recipe);
     Task DeleteRecipeAsync(int id);
-    // TODO: Task UpdateRecipeAsync(Recipe recipe);
+    Task UpdateRecipeAsync(Recipe recipe);
 }
