@@ -7,9 +7,14 @@ public partial class CreateRecipePage : ContentPage
 {
     public CreateRecipePage(CreateRecipeViewModel viewModel)
     {
+        var units = new List<string>();
+        foreach (var unit in Enum.GetValues<UnitOfMeasure>())
+        {
+            units.Add(unit.GetDisplayString());
+        }
         InitializeComponent();
         BindingContext = viewModel;
-        UnitPicker.ItemsSource = Enum.GetNames(typeof(UnitOfMeasure));
+        UnitPicker.ItemsSource = units;
     }
 
     protected override void OnDisappearing()

@@ -57,12 +57,14 @@ public partial class CreateRecipeViewModel : ObservableObject
     public void AddIngredient()
     {
         var amount = double.Parse(CurrentIngredientAmount);
+        var unit = Enum.GetValues<UnitOfMeasure>()
+            .FirstOrDefault(u => u.GetDisplayString() == CurrentIngredientUnit);
 
         var ingredient = new Ingredient
         {
             Name = CurrentIngredientName,
             Quantity = amount,
-            Unit = Enum.Parse<UnitOfMeasure>(CurrentIngredientUnit)
+            Unit = unit
         };
 
         Ingredients.Add(ingredient);

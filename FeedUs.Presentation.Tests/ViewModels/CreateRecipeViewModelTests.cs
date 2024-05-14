@@ -38,11 +38,11 @@ public class CreateRecipeViewModelTests
         // Act
         _viewModel.CurrentIngredientName = "Ingredient 1";
         _viewModel.CurrentIngredientAmount = "100";
-        _viewModel.CurrentIngredientUnit = "Gram";
+        _viewModel.CurrentIngredientUnit = "g";
         _viewModel.AddIngredient();
         _viewModel.CurrentIngredientName = "Ingredient 2";
         _viewModel.CurrentIngredientAmount = "2";
-        _viewModel.CurrentIngredientUnit = "Can";
+        _viewModel.CurrentIngredientUnit = "can";
         _viewModel.AddIngredient();
 
         // Assert
@@ -82,7 +82,7 @@ public class CreateRecipeViewModelTests
         _viewModel.Description = "Description";
         _viewModel.CurrentIngredientName = "Ingredient 1";
         _viewModel.CurrentIngredientAmount = "100";
-        _viewModel.CurrentIngredientUnit = "Gram";
+        _viewModel.CurrentIngredientUnit = "g";
         _viewModel.AddIngredient();
         _viewModel.CurrentStep = "Step 1";
         _viewModel.AddStep();
@@ -107,11 +107,11 @@ public class CreateRecipeViewModelTests
 
         _viewModel.CurrentIngredientName = "Ingredient 1";
         _viewModel.CurrentIngredientAmount = "100";
-        _viewModel.CurrentIngredientUnit = "Gram";
+        _viewModel.CurrentIngredientUnit = "g";
         _viewModel.AddIngredient();
         _viewModel.CurrentIngredientName = "Ingredient 2";
         _viewModel.CurrentIngredientAmount = "2";
-        _viewModel.CurrentIngredientUnit = "Can";
+        _viewModel.CurrentIngredientUnit = "can";
         _viewModel.AddIngredient();
 
         // Act
