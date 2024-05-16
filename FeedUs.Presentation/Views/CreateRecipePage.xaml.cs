@@ -21,5 +21,6 @@ public partial class CreateRecipePage : ContentPage
     {
         base.OnDisappearing();
         (BindingContext as CreateRecipeViewModel)?.OnViewDisappearing();
+        BindingContext = null;
     }
 }
