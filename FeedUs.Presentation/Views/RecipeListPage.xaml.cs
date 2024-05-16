@@ -10,9 +10,9 @@ public partial class RecipeListPage : ContentPage
         BindingContext = viewModel;
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
-        (BindingContext as RecipeListViewModel).LoadRecipesAsync();
+        await (BindingContext as RecipeListViewModel).LoadRecipesAsync();
     }
 }

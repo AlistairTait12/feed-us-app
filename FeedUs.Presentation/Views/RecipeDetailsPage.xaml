@@ -4,53 +4,57 @@
              xmlns:model="clr-namespace:FeedUs.Presentation.Models"
              xmlns:viewModel="clr-namespace:FeedUs.Presentation.ViewModels"
              x:DataType="viewModel:RecipeDetailsViewModel"
-             x:Class="FeedUs.Presentation.Views.RecipeDetailsPage"
-             Title="RecipeDetailsPage">
-    <VerticalStackLayout
-        Padding="30,0">
-        <Label Text="{Binding Recipe.Title}" FontSize="Title"/>
-        <Label Text="{Binding Recipe.Description}" FontSize="Body"/>
-        <Label Text="Ingredients" FontSize="Large"/>
-        <CollectionView ItemsSource="{Binding Recipe.Ingredients}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:Ingredient">
-                    <Border Stroke="MediumPurple">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="25"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Row="0" Text="{Binding Name}" FontAttributes="Bold" Grid.ColumnSpan="2"/>
-                            <Label Grid.Row="1" Text="{Binding Quantity}" Grid.Column="0"/>
-                            <Label Grid.Row="1" Text="{Binding Unit}" Grid.Column="1"/>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <Label Text="Steps" FontSize="Large"/>
-        <CollectionView ItemsSource="{Binding Recipe.Steps}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="x:String">
-                    <Border Stroke="LightBlue">
-                        <Label Text="{Binding .}" FontSize="Body"/>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <Button Text="Delete"
-                Margin="0,10,0,0"
-                Command="{Binding DeleteRecipeCommand}"
-                Background="Red"/>
-        <Button Text="Update"
-                Margin="0,10,0,0"
-                Command="{Binding GoToUpdateRecipeCommand}"/>
-        <Button Text="Back"
-                Margin="0,10,0,0"
-                Command="{Binding GoBackCommand}"/>
-    </VerticalStackLayout>
+             x:Class="FeedUs.Presentation.Views.RecipeDetailsPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="5,0">
+            <Label Text="{Binding Recipe.Title}" FontSize="Title"/>
+            <Label Text="{Binding Recipe.Description}" FontSize="Body"/>
+            <Label Text="Ingredients" FontSize="Large"/>
+            <CollectionView ItemsSource="{Binding Recipe.Ingredients}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Ingredient">
+                        <Border Stroke="Transparent">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="15*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding Quantity}" Grid.Column="0"/>
+                                <Label Text="{Binding Unit}" Grid.Column="1"/>
+                                <Label Text="{Binding Name}" FontAttributes="Bold" Grid.Column="2"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="Steps" FontSize="Large"/>
+            <CollectionView ItemsSource="{Binding Recipe.Steps}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <Border Stroke="Transparent">
+                            <Label Text="{Binding .}" FontSize="Body"/>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Grid ColumnSpacing="5" Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Text="Delete"
+                    Command="{Binding DeleteRecipeCommand}"
+                    Background="Red"
+                    Grid.Column="0"/>
+                <Button Text="Update"
+                    Command="{Binding GoToUpdateRecipeCommand}"
+                    Grid.Column="1"/>
+                <Button Text="Back"
+                    Command="{Binding GoBackCommand}"
+                    Grid.Column="2"/>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

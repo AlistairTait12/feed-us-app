@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FeedUs.Presentation.DataAccess;
 using FeedUs.Presentation.Models;
@@ -33,16 +31,9 @@ public partial class UpdateRecipeViewModel : ObservableObject
             { "Recipe", updatedVersion }
         };
         await _navigationWrapper.GoToAsync("..", parameters);
-        await DisplayConfirmationToast();
+        await DisplayUpdatedConfirmationToast();
     }
 
-    private async Task DisplayConfirmationToast()
-    {
-        var toastContent = $"Recipe {Recipe.Title} updated";
-        var toast = Toast.Make(toastContent,
-            ToastDuration.Long,
-            14);
-
-        await toast.Show();
-    }
+    private async Task DisplayUpdatedConfirmationToast() =>
+        await ViewModelStaticMethods.DisplayToast($"Recipe {Recipe.Title} updated");
 }

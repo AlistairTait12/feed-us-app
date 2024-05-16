@@ -4,18 +4,21 @@
              xmlns:model="clr-namespace:FeedUs.Presentation.Models"
              xmlns:viewModel="clr-namespace:FeedUs.Presentation.ViewModels"
              x:Class="FeedUs.Presentation.Views.RecipeListPage"
-             x:DataType="viewModel:RecipeListViewModel"
-             Title="RecipeListPage">
-    <VerticalStackLayout Padding="30,0">
+             x:DataType="viewModel:RecipeListViewModel">
+    <VerticalStackLayout Padding="5,0">
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Your recipes"
+            FontSize="Title"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         <CollectionView ItemsSource="{Binding Recipes}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Recipe">
-                    <Border Stroke="MediumPurple"
-                            StrokeThickness="2">
+                    <Border Stroke="MediumBlue" BackgroundColor="MediumBlue"
+                            StrokeThickness="2" Padding="5">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5"/>
+                        </Border.StrokeShape>
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:RecipeListViewModel}},

@@ -57,12 +57,14 @@ public partial class CreateRecipeViewModel : ObservableObject
     public void AddIngredient()
     {
         var amount = double.Parse(CurrentIngredientAmount);
+        var unit = Enum.GetValues<UnitOfMeasure>()
+            .FirstOrDefault(u => u.GetDisplayString() == CurrentIngredientUnit);
 
         var ingredient = new Ingredient
         {
             Name = CurrentIngredientName,
             Quantity = amount,
-            Unit = Enum.Parse<UnitOfMeasure>(CurrentIngredientUnit)
+            Unit = unit
         };
 
         Ingredients.Add(ingredient);
@@ -97,7 +99,12 @@ public partial class CreateRecipeViewModel : ObservableObject
 
         await _dataAccess.AddRecipeAsync(recipe);
         await _navigationWrapper.GoToAsync("..");
+        await DisplayCreatedConfirmationToast();
     }
+
+    [RelayCommand]
+    private async Task DisplayCreatedConfirmationToast() =>
+        await ViewModelStaticMethods.DisplayToast($"Recipe {Title} created");
 
     // Button enablement logic
     partial void OnCurrentStepChanged(string value) => UpdateAddStepButtonEnabled();
