@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FeedUs.Presentation.DataAccess;
 using FeedUs.Presentation.Models;
@@ -55,14 +53,6 @@ public partial class RecipeDetailsViewModel : ObservableObject
         await _navigationWrapper.GoToAsync(nameof(UpdateRecipePage), parameters);
     }
 
-    // TODO: Seems to work fine on Android, but not on Windows
-    private async Task DisplayDeletedConfirmationToast()
-    {
-        var toastContent = $"Recipe {Recipe.Title} deleted";
-        var toast = Toast.Make(toastContent,
-            ToastDuration.Long,
-            14);
-
-        await toast.Show();
-    }
+    private async Task DisplayDeletedConfirmationToast() =>
+        await ViewModelStaticMethods.DisplayToast($"Recipe {Recipe.Title} deleted");
 }

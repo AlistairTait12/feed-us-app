@@ -99,7 +99,12 @@ public partial class CreateRecipeViewModel : ObservableObject
 
         await _dataAccess.AddRecipeAsync(recipe);
         await _navigationWrapper.GoToAsync("..");
+        await DisplayCreatedConfirmationToast();
     }
+
+    [RelayCommand]
+    private async Task DisplayCreatedConfirmationToast() =>
+        await ViewModelStaticMethods.DisplayToast($"Recipe {Title} created");
 
     // Button enablement logic
     partial void OnCurrentStepChanged(string value) => UpdateAddStepButtonEnabled();
