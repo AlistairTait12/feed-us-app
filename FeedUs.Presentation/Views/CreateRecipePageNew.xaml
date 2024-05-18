@@ -20,6 +20,9 @@
             <!--Description-->
             <Editor Text="{Binding Description}"
                     Placeholder="Description"/>
+            <Button Text="Create Recipe" Command="{Binding CreateRecipeCommand}"
+                    Margin="0,10,0,0" IsEnabled="{Binding CreateButtonEnabled}"
+                    BackgroundColor="Lime"/>
         </VerticalStackLayout>
         <Grid x:Name="IngredientsSection"
               Grid.Row="0">
