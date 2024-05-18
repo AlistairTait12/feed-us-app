@@ -65,9 +65,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\CreateRecipePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\CreateRecipePageNew.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
