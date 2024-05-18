@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FeedUs.Presentation.Views.CreateRecipePageNew"
+             xmlns:viewModel="clr-namespace:FeedUs.Presentation.ViewModels"
+             xmlns:model="clr-namespace:FeedUs.Presentation.Models"
+             x:DataType="viewModel:CreateRecipeViewModel">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <VerticalStackLayout x:Name="DetailsSection"
+                             Grid.Row="0">
+            <!--TODO-->
+            <!--Title-->
+            <Entry Text="{Binding Title}"
+                   Placeholder="Title"
+                   Margin="0,0,0,5"/>
+            <!--Description-->
+            <Editor Text="{Binding Description}"
+                    Placeholder="Description"/>
+        </VerticalStackLayout>
+        <Grid x:Name="IngredientsSection"
+              Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!--TODO-->
+            <!--CollectionView-->
+            <CollectionView ItemsSource="{Binding Ingredients}"
+                            Grid.Row="0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Ingredient">
+                        <Grid ColumnSpacing="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Stroke="MediumPurple" Padding="5"
+                                    HeightRequest="44" Grid.Column="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Grid ColumnSpacing="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Text="{Binding Name}"
+                                           VerticalOptions="Center"/>
+                                    <Label Grid.Column="1" Text="{Binding Quantity}"
+                                           VerticalOptions="Center"/>
+                                    <Label Grid.Column="2" Text="{Binding Unit}"
+                                           VerticalOptions="Center"/>
+                                </Grid>
+                            </Border>
+                            <Button Text="Remove"
+                                    Grid.Column="1"
+                                    BackgroundColor="Red"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:CreateRecipeViewModel}},
+                                        Path=RemoveIngredientCommand}"
+                                    CommandParameter="{Binding .}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <!--Add Ingredient-->
+            <Grid ColumnSpacing="5" Margin="0,5,0,0"
+                  Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Entry Grid.Column="0" Placeholder="Ingredient Name"
+                       Text="{Binding CurrentIngredientName}" />
+                <Entry Grid.Column="1" Text="{Binding CurrentIngredientAmount}"
+                       Placeholder="Amount"/>
+                <Picker Grid.Column="2" SelectedItem="{Binding CurrentIngredientUnit}"
+                        x:Name="UnitPicker"/>
+                <Button Text="Add Ingredient" Command="{Binding AddIngredientCommand}"
+                        IsEnabled="{Binding AddIngredientButtonEnabled}"
+                        Grid.Column="3"/>
+            </Grid>
+        </Grid>
+        <Grid x:Name="StepsSection"
+              Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!--TODO-->
+            <!--CollectionView-->
+            <CollectionView ItemsSource="{Binding Steps}"
+                            Grid.Row="0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <Grid ColumnSpacing="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Stroke="LightBlue" Padding="5"
+                                HeightRequest="44" Grid.Column="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+                                <Label Text="{Binding .}" VerticalOptions="Center"/>
+                            </Border>
+                            <Button Grid.Column="1" Text="Remove" BackgroundColor="Red"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:CreateRecipeViewModel}},
+                                        Path=RemoveStepCommand}"
+                                    CommandParameter="{Binding .}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <!--Add Step-->
+            <Grid ColumnSpacing="5"
+                  Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Entry Placeholder="Step" Text="{Binding CurrentStep}"
+                       Margin="0,10,0,0" Grid.Column="0"/>
+                <Button Text="Add Step" Command="{Binding AddStepCommand}"
+                        Margin="0,10,0,0" IsEnabled="{Binding AddStepButtonEnabled}"
+                        Grid.Column="1"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1"
+              ColumnSpacing="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"
+                    Text="Details"
+                    Clicked="OnDetailsSectionClicked"/>
+            <Button Grid.Column="1"
+                    Text="Ingredients"
+                    Clicked="OnIngredientsSectionClicked"/>
+            <Button Grid.Column="2"
+                    Text="Steps"
+                    Clicked="OnStepsSectionClicked"/>
+        </Grid>
+    </Grid>
+</ContentPage>
