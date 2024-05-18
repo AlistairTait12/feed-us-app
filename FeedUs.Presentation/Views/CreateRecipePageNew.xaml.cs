@@ -21,22 +21,31 @@ public partial class CreateRecipePageNew : ContentPage
     public void OnDetailsSectionClicked(object sender, EventArgs e)
     {
         StepsSection.IsVisible = false;
+        StepsButton.BackgroundColor = Color.Parse("Grey");
         IngredientsSection.IsVisible = false;
+        IngredientButton.BackgroundColor = Color.Parse("Grey");
         DetailsSection.IsVisible = true;
+        DetailsButton.BackgroundColor = Color.Parse("Green");
     }
 
     public void OnIngredientsSectionClicked(object sender, EventArgs e)
     {
         DetailsSection.IsVisible = false;
+        DetailsButton.BackgroundColor = Color.Parse("Grey");
         StepsSection.IsVisible = false;
+        StepsButton.BackgroundColor = Color.Parse("Grey");
         IngredientsSection.IsVisible = true;
+        IngredientButton.BackgroundColor = Color.Parse("Green");
     }
 
     public void OnStepsSectionClicked(object sender, EventArgs e)
     {
         DetailsSection.IsVisible = false;
+        DetailsButton.BackgroundColor = Color.Parse("Grey");
         IngredientsSection.IsVisible = false;
+        IngredientButton.BackgroundColor = Color.Parse("Grey");
         StepsSection.IsVisible = true;
+        StepsButton.BackgroundColor = Color.Parse("Green");
     }
 
     protected override void OnDisappearing()

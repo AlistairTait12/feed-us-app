@@ -146,12 +146,12 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Text="Details"
-                    Clicked="OnDetailsSectionClicked"/>
-            <Button Grid.Column="1" Text="Ingredients"
-                    Clicked="OnIngredientsSectionClicked"/>
-            <Button Grid.Column="2" Text="Steps"
-                    Clicked="OnStepsSectionClicked"/>
+            <Button Grid.Column="0" Text="Details" BackgroundColor="Green"
+                    x:Name="DetailsButton" Clicked="OnDetailsSectionClicked"/>
+            <Button Grid.Column="1" Text="Ingredients" BackgroundColor="Grey"
+                    x:Name="IngredientButton" Clicked="OnIngredientsSectionClicked"/>
+            <Button Grid.Column="2" Text="Steps" BackgroundColor="Grey"
+                    x:Name="StepsButton" Clicked="OnStepsSectionClicked"/>
         </Grid>
     </Grid>
 </ContentPage>
