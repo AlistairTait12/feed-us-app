@@ -12,12 +12,9 @@
         </Grid.RowDefinitions>
         <VerticalStackLayout x:Name="DetailsSection"
                              Grid.Row="0">
-            <!--TODO-->
-            <!--Title-->
             <Entry Text="{Binding Title}"
                    Placeholder="Title"
                    Margin="0,0,0,5"/>
-            <!--Description-->
             <Editor Text="{Binding Description}"
                     Placeholder="Description"/>
             <Button Text="Create Recipe" Command="{Binding CreateRecipeCommand}"
@@ -30,8 +27,6 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <!--TODO-->
-            <!--CollectionView-->
             <CollectionView ItemsSource="{Binding Ingredients}"
                             Grid.Row="0">
                 <CollectionView.ItemsLayout>
@@ -74,7 +69,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <!--Add Ingredient-->
             <Grid ColumnSpacing="5" Margin="0,5,0,5"
                   Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -100,8 +94,6 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <!--TODO-->
-            <!--CollectionView-->
             <CollectionView ItemsSource="{Binding Steps}"
                             Grid.Row="0">
                 <CollectionView.ItemsLayout>
@@ -130,7 +122,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <!--Add Step-->
             <Grid ColumnSpacing="5" Grid.Row="1" Margin="0,5,0,5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="4*" />
