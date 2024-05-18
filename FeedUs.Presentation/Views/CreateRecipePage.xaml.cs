@@ -3,9 +3,9 @@ using FeedUs.Presentation.ViewModels;
 
 namespace FeedUs.Presentation.Views;
 
-public partial class CreateRecipePageNew : ContentPage
+public partial class CreateRecipePage : ContentPage
 {
-    public CreateRecipePageNew(CreateRecipeViewModel viewModel)
+    public CreateRecipePage(CreateRecipeViewModel viewModel)
     {
         var units = new List<string>();
         foreach (var unit in Enum.GetValues<UnitOfMeasure>())

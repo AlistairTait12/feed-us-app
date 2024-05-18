@@ -17,7 +17,7 @@ public partial class MainPage : ContentPage
 
     private async void OnCreateRecipeButtonClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(CreateRecipePageNew));
+        await Shell.Current.GoToAsync(nameof(CreateRecipePage));
     }
 }
 
