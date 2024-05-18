@@ -5,7 +5,7 @@
              xmlns:viewModel="clr-namespace:FeedUs.Presentation.ViewModels"
              xmlns:model="clr-namespace:FeedUs.Presentation.Models"
              x:DataType="viewModel:CreateRecipeViewModel">
-    <Grid>
+    <Grid Margin="2,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -31,12 +31,16 @@
             <!--CollectionView-->
             <CollectionView ItemsSource="{Binding Ingredients}"
                             Grid.Row="0">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="2"/>
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Ingredient">
                         <Grid ColumnSpacing="5">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5*"/>
-                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Border Stroke="MediumPurple" Padding="5"
                                     HeightRequest="44" Grid.Column="0">
@@ -68,7 +72,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <!--Add Ingredient-->
-            <Grid ColumnSpacing="5" Margin="0,5,0,0"
+            <Grid ColumnSpacing="5" Margin="0,5,0,5"
                   Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*" />
@@ -97,12 +101,16 @@
             <!--CollectionView-->
             <CollectionView ItemsSource="{Binding Steps}"
                             Grid.Row="0">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="2"/>
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="x:String">
                         <Grid ColumnSpacing="5">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5*"/>
-                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Border Stroke="LightBlue" Padding="5"
                                 HeightRequest="44" Grid.Column="0">
@@ -120,8 +128,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <!--Add Step-->
-            <Grid ColumnSpacing="5"
-                  Grid.Row="1">
+            <Grid ColumnSpacing="5" Grid.Row="1" Margin="0,5,0,5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="4*" />
                     <ColumnDefinition Width="2*" />
@@ -133,21 +140,17 @@
                         Grid.Column="1"/>
             </Grid>
         </Grid>
-        <Grid Grid.Row="1"
-              ColumnSpacing="5">
+        <Grid Grid.Row="1" ColumnSpacing="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0"
-                    Text="Details"
+            <Button Grid.Column="0" Text="Details"
                     Clicked="OnDetailsSectionClicked"/>
-            <Button Grid.Column="1"
-                    Text="Ingredients"
+            <Button Grid.Column="1" Text="Ingredients"
                     Clicked="OnIngredientsSectionClicked"/>
-            <Button Grid.Column="2"
-                    Text="Steps"
+            <Button Grid.Column="2" Text="Steps"
                     Clicked="OnStepsSectionClicked"/>
         </Grid>
     </Grid>
