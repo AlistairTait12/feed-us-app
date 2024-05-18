@@ -1,25 +1,44 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FeedUs.Presentation.Views.CreateRecipePage"
              xmlns:viewModel="clr-namespace:FeedUs.Presentation.ViewModels"
              xmlns:model="clr-namespace:FeedUs.Presentation.Models"
-             x:Class="FeedUs.Presentation.Views.CreateRecipePage"
              x:DataType="viewModel:CreateRecipeViewModel">
-    <ScrollView>
-        <VerticalStackLayout Padding="5,0">
-            <Label Text="Create Recipe" FontSize="Large" />
-            <Entry Placeholder="Title" Text="{Binding Title}"
-                   Margin="0,10,0,0"/>
-            <Entry Placeholder="Description (Optional)" Text="{Binding Description}"
-                   Margin="0,10,0,0"/>
-            <Label Text="Ingredients" FontSize="Medium" />
-            <CollectionView ItemsSource="{Binding Ingredients}">
+    <Grid Margin="2,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <VerticalStackLayout x:Name="DetailsSection"
+                             Grid.Row="0">
+            <Entry Text="{Binding Title}"
+                   Placeholder="Title"
+                   Margin="0,0,0,5"/>
+            <Editor Text="{Binding Description}"
+                    Placeholder="Description"/>
+            <Button Text="Create Recipe" Command="{Binding CreateRecipeCommand}"
+                    Margin="0,10,0,0" IsEnabled="{Binding CreateButtonEnabled}"
+                    BackgroundColor="Lime"/>
+        </VerticalStackLayout>
+        <Grid x:Name="IngredientsSection"
+              Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <CollectionView ItemsSource="{Binding Ingredients}"
+                            Grid.Row="0">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="2"/>
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Ingredient">
                         <Grid ColumnSpacing="5">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5*"/>
-                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Border Stroke="MediumPurple" Padding="5"
                                     HeightRequest="44" Grid.Column="0">
@@ -50,7 +69,8 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Grid ColumnSpacing="5" Margin="0,5,0,0">
+            <Grid ColumnSpacing="5" Margin="0,5,0,5"
+                  Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="1*" />
@@ -67,14 +87,25 @@
                         IsEnabled="{Binding AddIngredientButtonEnabled}"
                         Grid.Column="3"/>
             </Grid>
-            <Label Text="Steps" FontSize="Medium" Margin="0,10,0,0"/>
-            <CollectionView ItemsSource="{Binding Steps}">
+        </Grid>
+        <Grid x:Name="StepsSection"
+              Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <CollectionView ItemsSource="{Binding Steps}"
+                            Grid.Row="0">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="2"/>
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="x:String">
                         <Grid ColumnSpacing="5">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5*"/>
-                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Border Stroke="LightBlue" Padding="5"
                                 HeightRequest="44" Grid.Column="0">
@@ -91,7 +122,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Grid ColumnSpacing="5">
+            <Grid ColumnSpacing="5" Grid.Row="1" Margin="0,5,0,5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="4*" />
                     <ColumnDefinition Width="2*" />
@@ -102,9 +133,19 @@
                         Margin="0,10,0,0" IsEnabled="{Binding AddStepButtonEnabled}"
                         Grid.Column="1"/>
             </Grid>
-            <Button Text="Create Recipe" Command="{Binding CreateRecipeCommand}"
-                    Margin="0,10,0,0" IsEnabled="{Binding CreateButtonEnabled}"
-                    BackgroundColor="Lime"/>
-        </VerticalStackLayout>
-    </ScrollView>
+        </Grid>
+        <Grid Grid.Row="1" ColumnSpacing="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Text="Details" BackgroundColor="Green"
+                    x:Name="DetailsButton" Clicked="OnDetailsSectionClicked"/>
+            <Button Grid.Column="1" Text="Ingredients" BackgroundColor="Grey"
+                    x:Name="IngredientButton" Clicked="OnIngredientsSectionClicked"/>
+            <Button Grid.Column="2" Text="Steps" BackgroundColor="Grey"
+                    x:Name="StepsButton" Clicked="OnStepsSectionClicked"/>
+        </Grid>
+    </Grid>
 </ContentPage>
