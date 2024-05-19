@@ -5,17 +5,32 @@ namespace FeedUs.Presentation.Views;
 
 public partial class CreateRecipePage : ContentPage
 {
-    public CreateRecipePage(CreateRecipeViewModel viewModel)
+    private readonly IServiceProvider _serviceProvider;
+
+    public CreateRecipePage(IServiceProvider serviceProvider)
     {
+        _serviceProvider = serviceProvider;
         var units = new List<string>();
         foreach (var unit in Enum.GetValues<UnitOfMeasure>())
         {
             units.Add(unit.GetDisplayString());
         }
         InitializeComponent();
-        BindingContext = viewModel;
         UnitPicker.ItemsSource = units;
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        BindingContext = _serviceProvider.GetRequiredService<CreateRecipeViewModel>();
         OnDetailsSectionClicked(this, EventArgs.Empty);
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        (BindingContext as CreateRecipeViewModel)?.OnViewDisappearing();
+        BindingContext = null;
     }
 
     public void OnDetailsSectionClicked(object sender, EventArgs e)
@@ -46,12 +61,5 @@ public partial class CreateRecipePage : ContentPage
         IngredientButton.BackgroundColor = Color.Parse("Grey");
         StepsSection.IsVisible = true;
         StepsButton.BackgroundColor = Color.Parse("Green");
-    }
-
-    protected override void OnDisappearing()
-    {
-        base.OnDisappearing();
-        (BindingContext as CreateRecipeViewModel)?.OnViewDisappearing();
-        BindingContext = null;
     }
 }
