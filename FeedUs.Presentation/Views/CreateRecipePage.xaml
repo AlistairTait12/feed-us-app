@@ -79,7 +79,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
                 <Entry Grid.Column="0" Placeholder="Ingredient Name"
@@ -93,7 +93,8 @@
                         Grid.Column="3">
                     <Button.ImageSource>
                         <FontImageSource FontFamily="FontAwesomeSolid"
-                                         Glyph="{x:Static app:FontAwesomeSolid.PlusCircle}"/>
+                                         Glyph="{x:Static app:FontAwesomeSolid.PlusCircle}"
+                                         Size="14"/>
                     </Button.ImageSource>
                 </Button>
             </Grid>
@@ -139,7 +140,7 @@
             </CollectionView>
             <Grid ColumnSpacing="5" Grid.Row="1" Margin="0,5,0,5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="9*" />
+                    <ColumnDefinition Width="7*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
                 <Entry Placeholder="Step" Text="{Binding CurrentStep}"
@@ -149,7 +150,8 @@
                         Grid.Column="1">
                     <Button.ImageSource>
                         <FontImageSource FontFamily="FontAwesomeSolid"
-                                         Glyph="{x:Static app:FontAwesomeSolid.PlusCircle}"/>
+                                         Glyph="{x:Static app:FontAwesomeSolid.PlusCircle}"
+                                         Size="14"/>
                     </Button.ImageSource>
                 </Button>
             </Grid>
@@ -164,21 +166,24 @@
                     x:Name="DetailsButton" Clicked="OnDetailsSectionClicked">
                 <Button.ImageSource>
                     <FontImageSource FontFamily="FontAwesomeSolid"
-                                     Glyph="{x:Static app:FontAwesomeSolid.Scroll}"/>
+                                     Glyph="{x:Static app:FontAwesomeSolid.Scroll}"
+                                     Size="14"/>
                 </Button.ImageSource>
             </Button>
             <Button Grid.Column="1" Text="Ingredients" BackgroundColor="Grey"
                     x:Name="IngredientButton" Clicked="OnIngredientsSectionClicked">
                 <Button.ImageSource>
                     <FontImageSource FontFamily="FontAwesomeSolid"
-                                     Glyph="{x:Static app:FontAwesomeSolid.Carrot}"/>
+                                     Glyph="{x:Static app:FontAwesomeSolid.Carrot}"
+                                     Size="14"/>
                 </Button.ImageSource>
             </Button>
             <Button Grid.Column="2" Text="Steps" BackgroundColor="Grey"
                     x:Name="StepsButton" Clicked="OnStepsSectionClicked">
                 <Button.ImageSource>
                     <FontImageSource FontFamily="FontAwesomeSolid"
-                                     Glyph="{x:Static app:FontAwesomeSolid.List}"/>
+                                     Glyph="{x:Static app:FontAwesomeSolid.List}"
+                                     Size="14"/>
                 </Button.ImageSource>
             </Button>
         </Grid>
