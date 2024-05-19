@@ -4,6 +4,7 @@
              x:Class="FeedUs.Presentation.Views.CreateRecipePage"
              xmlns:viewModel="clr-namespace:FeedUs.Presentation.ViewModels"
              xmlns:model="clr-namespace:FeedUs.Presentation.Models"
+             xmlns:app="clr-namespace:FeedUs.Presentation.Resources.Styles"
              x:DataType="viewModel:CreateRecipeViewModel">
     <Grid Margin="2,0">
         <Grid.RowDefinitions>
@@ -59,12 +60,16 @@
                                            VerticalOptions="Center"/>
                                 </Grid>
                             </Border>
-                            <Button Text="Remove"
-                                    Grid.Column="1"
+                            <Button Grid.Column="1"
                                     BackgroundColor="Red"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:CreateRecipeViewModel}},
                                         Path=RemoveIngredientCommand}"
-                                    CommandParameter="{Binding .}"/>
+                                    CommandParameter="{Binding .}">
+                                <Button.ImageSource>
+                                    <FontImageSource FontFamily="FontAwesomeSolid" Size="16"
+                                                     Glyph="{x:Static app:FontAwesomeSolid.TrashAlt}"/>
+                                </Button.ImageSource>
+                            </Button>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -73,8 +78,8 @@
                   Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
                 <Entry Grid.Column="0" Placeholder="Ingredient Name"
@@ -83,9 +88,14 @@
                        Placeholder="Amount"/>
                 <Picker Grid.Column="2" SelectedItem="{Binding CurrentIngredientUnit}"
                         x:Name="UnitPicker"/>
-                <Button Text="Add Ingredient" Command="{Binding AddIngredientCommand}"
+                <Button Command="{Binding AddIngredientCommand}"
                         IsEnabled="{Binding AddIngredientButtonEnabled}"
-                        Grid.Column="3"/>
+                        Grid.Column="3">
+                    <Button.ImageSource>
+                        <FontImageSource FontFamily="FontAwesomeSolid"
+                                         Glyph="{x:Static app:FontAwesomeSolid.PlusCircle}"/>
+                    </Button.ImageSource>
+                </Button>
             </Grid>
         </Grid>
         <Grid x:Name="StepsSection"
@@ -114,24 +124,34 @@
                                 </Border.StrokeShape>
                                 <Label Text="{Binding .}" VerticalOptions="Center"/>
                             </Border>
-                            <Button Grid.Column="1" Text="Remove" BackgroundColor="Red"
+                            <Button Grid.Column="1" BackgroundColor="Red"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:CreateRecipeViewModel}},
                                         Path=RemoveStepCommand}"
-                                    CommandParameter="{Binding .}"/>
+                                    CommandParameter="{Binding .}">
+                                <Button.ImageSource>
+                                    <FontImageSource FontFamily="FontAwesomeSolid" Size="16"
+                                                     Glyph="{x:Static app:FontAwesomeSolid.TrashAlt}"/>
+                                </Button.ImageSource>
+                            </Button>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <Grid ColumnSpacing="5" Grid.Row="1" Margin="0,5,0,5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*" />
-                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="9*" />
+                    <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
                 <Entry Placeholder="Step" Text="{Binding CurrentStep}"
                        Margin="0,10,0,0" Grid.Column="0"/>
-                <Button Text="Add Step" Command="{Binding AddStepCommand}"
+                <Button Command="{Binding AddStepCommand}"
                         Margin="0,10,0,0" IsEnabled="{Binding AddStepButtonEnabled}"
-                        Grid.Column="1"/>
+                        Grid.Column="1">
+                    <Button.ImageSource>
+                        <FontImageSource FontFamily="FontAwesomeSolid"
+                                         Glyph="{x:Static app:FontAwesomeSolid.PlusCircle}"/>
+                    </Button.ImageSource>
+                </Button>
             </Grid>
         </Grid>
         <Grid Grid.Row="1" ColumnSpacing="5">
@@ -141,11 +161,26 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Text="Details" BackgroundColor="Green"
-                    x:Name="DetailsButton" Clicked="OnDetailsSectionClicked"/>
+                    x:Name="DetailsButton" Clicked="OnDetailsSectionClicked">
+                <Button.ImageSource>
+                    <FontImageSource FontFamily="FontAwesomeSolid"
+                                     Glyph="{x:Static app:FontAwesomeSolid.Scroll}"/>
+                </Button.ImageSource>
+            </Button>
             <Button Grid.Column="1" Text="Ingredients" BackgroundColor="Grey"
-                    x:Name="IngredientButton" Clicked="OnIngredientsSectionClicked"/>
+                    x:Name="IngredientButton" Clicked="OnIngredientsSectionClicked">
+                <Button.ImageSource>
+                    <FontImageSource FontFamily="FontAwesomeSolid"
+                                     Glyph="{x:Static app:FontAwesomeSolid.Carrot}"/>
+                </Button.ImageSource>
+            </Button>
             <Button Grid.Column="2" Text="Steps" BackgroundColor="Grey"
-                    x:Name="StepsButton" Clicked="OnStepsSectionClicked"/>
+                    x:Name="StepsButton" Clicked="OnStepsSectionClicked">
+                <Button.ImageSource>
+                    <FontImageSource FontFamily="FontAwesomeSolid"
+                                     Glyph="{x:Static app:FontAwesomeSolid.List}"/>
+                </Button.ImageSource>
+            </Button>
         </Grid>
     </Grid>
 </ContentPage>
