@@ -117,6 +117,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Border Stroke="LightBlue" Padding="5"
                                 HeightRequest="44" Grid.Column="0">
@@ -125,7 +127,25 @@
                                 </Border.StrokeShape>
                                 <Label Text="{Binding .}" VerticalOptions="Center"/>
                             </Border>
-                            <Button Grid.Column="1" BackgroundColor="Red"
+                            <Button Grid.Column="1" BackgroundColor="MediumPurple"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:CreateRecipeViewModel}},
+                                        Path=MoveStepUpCommand}"
+                                    CommandParameter="{Binding .}">
+                                <Button.ImageSource>
+                                    <FontImageSource FontFamily="FontAwesomeSolid" Size="16"
+                                                     Glyph="{x:Static app:FontAwesomeSolid.ArrowUp}"/>
+                                </Button.ImageSource>
+                            </Button>
+                            <Button Grid.Column="2" BackgroundColor="MediumPurple"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:CreateRecipeViewModel}},
+                                        Path=MoveStepDownCommand}"
+                                    CommandParameter="{Binding .}">
+                                <Button.ImageSource>
+                                    <FontImageSource FontFamily="FontAwesomeSolid" Size="16"
+                                                     Glyph="{x:Static app:FontAwesomeSolid.ArrowDown}"/>
+                                </Button.ImageSource>
+                            </Button>
+                            <Button Grid.Column="3" BackgroundColor="Red"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:CreateRecipeViewModel}},
                                         Path=RemoveStepCommand}"
                                     CommandParameter="{Binding .}">
