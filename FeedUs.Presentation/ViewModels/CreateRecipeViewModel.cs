@@ -87,6 +87,30 @@ public partial class CreateRecipeViewModel : ObservableObject
     public void RemoveStep(string step) => Steps.Remove(step);
 
     [RelayCommand]
+    public void MoveStepDown(string step)
+    {
+        int currentIndex = Steps.IndexOf(step);
+        int nextIndex = currentIndex + 1;
+
+        if (nextIndex < Steps.Count && currentIndex >= 0)
+        {
+            Steps.Move(currentIndex, nextIndex);
+        }
+    }
+
+    [RelayCommand]
+    public void MoveStepUp(string step)
+    {
+        int currentIndex = Steps.IndexOf(step);
+        int previousIndex = currentIndex - 1;
+
+        if (previousIndex >= 0 && currentIndex < Steps.Count)
+        {
+            Steps.Move(currentIndex, previousIndex);
+        }
+    }
+
+    [RelayCommand]
     public async Task CreateRecipeAsync()
     {
         var recipe = new Recipe
