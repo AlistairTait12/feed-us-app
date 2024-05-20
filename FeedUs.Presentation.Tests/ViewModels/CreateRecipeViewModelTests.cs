@@ -142,4 +142,154 @@ public class CreateRecipeViewModelTests
         // Assert
         _viewModel.Steps.Should().BeEquivalentTo(expected);
     }
+
+    [Test]
+    public void MoveStepDown_MovesStepDown()
+    {
+        // Arrange
+        var expected = new List<string>
+        {
+            "Step 2",
+            "Step 1",
+            "Step 3"
+        };
+
+        _viewModel.CurrentStep = "Step 1";
+        _viewModel.AddStep();
+        _viewModel.CurrentStep = "Step 2";
+        _viewModel.AddStep();
+        _viewModel.CurrentStep = "Step 3";
+        _viewModel.AddStep();
+
+        // Act
+        _viewModel.MoveStepDown("Step 1");
+
+        // Assert
+        _viewModel.Steps.Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
+    }
+
+    [Test]
+    public void MoveStepDown_DoesNotMoveStepDownIfAlreadyLast()
+    {
+        // Arrange
+        var expected = new List<string>
+        {
+            "Step 1",
+            "Step 2",
+            "Step 3"
+        };
+
+        _viewModel.CurrentStep = "Step 1";
+        _viewModel.AddStep();
+        _viewModel.CurrentStep = "Step 2";
+        _viewModel.AddStep();
+        _viewModel.CurrentStep = "Step 3";
+        _viewModel.AddStep();
+
+        // Act
+        _viewModel.MoveStepDown("Step 3");
+
+        // Assert
+        _viewModel.Steps.Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
+    }
+
+    [Test]
+    public void MoveStepDown_DoesNotMoveStepDownIfStepNotFound()
+    {
+        // Arrange
+        var expected = new List<string>
+        {
+            "Step 1",
+            "Step 2",
+            "Step 3"
+        };
+
+        _viewModel.CurrentStep = "Step 1";
+        _viewModel.AddStep();
+        _viewModel.CurrentStep = "Step 2";
+        _viewModel.AddStep();
+        _viewModel.CurrentStep = "Step 3";
+        _viewModel.AddStep();
+
+        // Act
+        _viewModel.MoveStepDown("Step 4");
+
+        // Assert
+        _viewModel.Steps.Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
+    }
+
+    [Test]
+    public void MoveStepUp_MovesStepUp()
+    {
+        // Arrange
+        var expected = new List<string>
+        {
+            "Step 2",
+            "Step 1",
+            "Step 3"
+        };
+
+        _viewModel.CurrentStep = "Step 1";
+        _viewModel.AddStep();
+        _viewModel.CurrentStep = "Step 2";
+        _viewModel.AddStep();
+        _viewModel.CurrentStep = "Step 3";
+        _viewModel.AddStep();
+
+        // Act
+        _viewModel.MoveStepUp("Step 2");
+
+        // Assert
+        _viewModel.Steps.Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
+    }
+
+    [Test]
+    public void MoveStepUp_DoesNotMoveStepUpIfAlreadyFirst()
+    {
+        // Arrange
+        var expected = new List<string>
+        {
+            "Step 1",
+            "Step 2",
+            "Step 3"
+        };
+
+        _viewModel.CurrentStep = "Step 1";
+        _viewModel.AddStep();
+        _viewModel.CurrentStep = "Step 2";
+        _viewModel.AddStep();
+        _viewModel.CurrentStep = "Step 3";
+        _viewModel.AddStep();
+
+        // Act
+        _viewModel.MoveStepUp("Step 1");
+
+        // Assert
+        _viewModel.Steps.Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
+    }
+
+    [Test]
+    public void MoveStepUp_DoesNotMoveStepUpIfStepNotFound()
+    {
+        // Arrange
+        var expected = new List<string>
+        {
+            "Step 1",
+            "Step 2",
+            "Step 3"
+        };
+
+        _viewModel.CurrentStep = "Step 1";
+        _viewModel.AddStep();
+        _viewModel.CurrentStep = "Step 2";
+        _viewModel.AddStep();
+        _viewModel.CurrentStep = "Step 3";
+        _viewModel.AddStep();
+
+        // Act
+        _viewModel.MoveStepUp("Step 4");
+
+        // Assert
+        _viewModel.Steps.Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
+    }
 }
